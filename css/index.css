@@ -1,7 +1,17 @@
-.modal-body input {
+.modal-body input , .main input{
+	margin-bottom:  8px;
+}
+
+.modal-body button , .main button{
 	margin : 5px;
 }
 
-.modal-body button {
-	margin : 5px;
+nav{
+	background: #f3f3f3;
+	box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.50);		
+}
+.main {
+	padding:10px;
+	font-family: "ubuntu";
+	box-shadow: 4px 4px 3px 2px rgba(0,0,0,0.75);
 }

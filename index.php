@@ -74,7 +74,7 @@ include_once 'classes.php';
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<input type="text" name="password" class="form-control" required="required" placeholder="Password">
+			<input type="password" name="password" class="form-control" required="required" placeholder="Password">
 		</div>
 	</div>
 	<div class="row">
@@ -93,9 +93,11 @@ include_once 'classes.php';
 	</div>
 </div>
 <div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4 ">
+	<div class="main col-xs-12 col-sm-12 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4 ">
 		<form action="" method="POST" role="form">
-			<legend>Login Here</legend>
+			<legend><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Login</legend>
+			<input type="text" name="userName" class="form-control" required="required" placeholder="User Name">
+			<input type="password" name="password" class="form-control" required="required" placeholder="Password">
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
