@@ -1,5 +1,7 @@
-.centered 
-{
-	float:none;
-	margin : 0 auto;
+.modal-body input {
+	margin : 5px;
+}
+
+.modal-body button {
+	margin : 5px;
 }

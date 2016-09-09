@@ -78,8 +78,13 @@ include_once 'classes.php';
 		</div>
 	</div>
 	<div class="row">
+		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+			<input type="file" name="profilePic" class="form-control" required="required" placeholder="Profile Photo">
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary">Sign Up</button>
 		</div>
 	</div>
 	</form>
@@ -87,13 +92,10 @@ include_once 'classes.php';
 	</div>
 	</div>
 </div>
-<div class="row centered">
-	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4 ">
 		<form action="" method="POST" role="form">
-			<legend>Form title</legend>
-		
-			
-		
+			<legend>Login Here</legend>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
