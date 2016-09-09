@@ -3,13 +3,12 @@ class Users{
 	public function __construct($conn)
 	{
 		$this->conn = $conn;
-<<<<<<< HEAD
 	}
 	
 	public function isLogin($username, $password)
 	{
 		$password1 = md5($password);
-		$sql = "SELECT * FROM users WHERE userName = '$userName' AND password = "$password1"";
+		$sql = "SELECT * FROM users WHERE userName = '$userName' AND password = '$password1'";
 		$result = $this->conn->query($sql);
 
 		if ($result->num_rows == 0)
@@ -17,7 +16,7 @@ class Users{
 		else
 			return true;
 	}
-=======
+
 	}
 
 	public function is_signup($firstName, $lastName,$userName,$password,$photo)
@@ -44,7 +43,7 @@ class Users{
 		
 
 	}
->>>>>>> 4e446a08540084d8e04b73b6ebb87c66fd146d52
+
 }
 
 
