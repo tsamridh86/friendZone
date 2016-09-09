@@ -3,7 +3,6 @@ class Users{
 	public function __construct($conn)
 	{
 		$this->conn = $conn;
-<<<<<<< HEAD
 	}
 	
 	public function isLogin($username, $password)
@@ -17,7 +16,6 @@ class Users{
 		else
 			return true;
 	}
-=======
 	}
 
 	public function is_signup($firstName, $lastName,$userName,$password,$photo)
@@ -44,7 +42,6 @@ class Users{
 		
 
 	}
->>>>>>> 4e446a08540084d8e04b73b6ebb87c66fd146d52
 }
 
 
