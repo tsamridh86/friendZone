@@ -1,6 +1,6 @@
 <?php
-include_once 'connect.php';
-include_once 'classes.php';
+require_once 'config/connect.php';
+require_once 'config/classes.php';
 ?>
 <!DOCTYPE html>
 <html>
