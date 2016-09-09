@@ -52,8 +52,18 @@
 		<h3> <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Join Us! </h3>
 	</div>
 	<div class="modal-body">
-		<p>Trust me, I'm an engineer.</p>
-		<p>Feel free to contact me.</p>
+	<div class="row">
+		<form action="" method="POST" role="form">
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<input type="text" name="firstName" class="form-control" required="required" placeholder="First Name">
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<input type="text" name="lastName" class="form-control" required="required" placeholder="Last Name">
+		</div>
+	</div>
+		<input type="text" name="userName">
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
 	</div>
 	<div class="modal-footer">
 		<p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 8758624706 </p>
