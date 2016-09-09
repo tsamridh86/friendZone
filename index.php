@@ -1,6 +1,6 @@
 <?php
-include_once 'connect.php'
-include_once 'classes.php'
+include_once 'connect.php';
+include_once 'classes.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,6 +12,8 @@ include_once 'classes.php'
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
 	<script src="js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 
 </head>
 <body>
@@ -85,6 +87,16 @@ include_once 'classes.php'
 	</div>
 	</div>
 </div>
-
+<div class="row centered">
+	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
+		<form action="" method="POST" role="form">
+			<legend>Form title</legend>
+		
+			
+		
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</div>
 </body>
 </html>
