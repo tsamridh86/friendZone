@@ -13,6 +13,8 @@ include_once 'classes.php';
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
 	<script src="js/bootstrap.min.js"></script>
 
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+
 </head>
 <body>
 <nav class="navbar" >
@@ -53,11 +55,11 @@ include_once 'classes.php';
 	<div class="modal-content">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">x</button>
-		<h3> <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Join Us! </h3>
+		<h3> <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Join Us! </h3>
 	</div>
 	<div class="modal-body">
+		<form action="" method="POST">
 	<div class="row">
-		<form action="" method="POST" role="form">
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 			<input type="text" name="firstName" class="form-control" required="required" placeholder="First Name">
 		</div>
@@ -65,19 +67,37 @@ include_once 'classes.php';
 			<input type="text" name="lastName" class="form-control" required="required" placeholder="Last Name">
 		</div>
 	</div>
-		<input type="text" name="userName">
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<input type="text" name="userName" class="form-control" required="required" placeholder="User Name">
+		</div>
 	</div>
-	<div class="modal-footer">
-		<p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 8758624706 </p>
-		<p><span class="glyphicon glyphicon-glyphicon glyphicon-envelope" aria-hidden="true"></span> t.samridh.86@gmail.com</p>
-		<p><span class="glyphicon glyphicon-glyphicon glyphicon-home" aria-hidden="true"></span> H-13, S.V.National Institute Of Technology, Surat</p>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<input type="text" name="password" class="form-control" required="required" placeholder="Password">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</div>
+	</div>
+	</form>
 	</div>
 	</div>
 	</div>
 </div>
-
+<div class="row centered">
+	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
+		<form action="" method="POST" role="form">
+			<legend>Form title</legend>
+		
+			
+		
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</div>
 </body>
 </html>
 <?php
