@@ -94,6 +94,12 @@ require_once 'config/classes.php';
 </div>
 <div class="row">
 	<div class="main col-xs-12 col-sm-12 col-md-offset-4 col-md-4 col-lg-offset-4 col-lg-4 ">
+	<!-- after the sign up warning symbols, use these with php to create maximum effect-->
+	<!--
+	<div class="alert alert-success" role="alert">Account creation successful. Login to continue.</div>
+	<div class="alert alert-danger" role="alert">The user name is taken. Please try another one.</div>
+	<div class="alert alert-danger" role="alert">The user name or password does not match. Please try again.</div>
+	-->
 		<form action="" method="POST" role="form">
 			<legend><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Login</legend>
 			<input type="text" name="userName" class="form-control" required="required" placeholder="User Name">
