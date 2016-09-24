@@ -4,6 +4,7 @@ nav{
 }
 
 .profile{
+	margin-top: 15px;
 	padding-top: 10px;
 	font-family: "calibri";
 	box-shadow: 4px 4px 3px 2px rgba(0,0,0,0.75);
@@ -13,12 +14,36 @@ nav{
 .textHolder {
 	text-align: center;
 	font-size: 18px;
+	padding-bottom: 10px;
 }
 
+.photoHolder {
+ 	border-radius: 50%;
+ 	display: block;
+ 	margin:auto;
+ }
 .bold {
 	font-weight: bolder;
 }
 
 .outer {
 	padding: 10px;
+	padding-right:25px;
+}
+
+.content {
+	padding:10px;
+}
+
+.repeat {
+	padding: 10px;
+	margin: 7px;
+	font-family: "open sans";
+	box-shadow: 4px 4px 3px 2px rgba(0,0,0,0.75);
+	background: #f3f3f3;
+}
+
+.heading{
+	margin-left: 5px;
+	font-size: 18px;
 }
