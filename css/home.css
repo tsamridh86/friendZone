@@ -17,11 +17,16 @@ nav{
 	padding-bottom: 10px;
 }
 
+.circle{
+	border-radius: 50%;
+}
+
 .photoHolder {
- 	border-radius: 50%;
  	display: block;
  	margin:auto;
  }
+
+
 .bold {
 	font-weight: bolder;
 }
@@ -43,7 +48,26 @@ nav{
 	background: #f3f3f3;
 }
 
+.repeat .row {
+	padding-bottom: 10px;
+}
+
 .heading{
 	margin-left: 5px;
 	font-size: 18px;
+}
+
+.postHead {
+	font-weight: bolder;
+}
+
+.trending {
+	padding:5px;
+	margin:5px;
+}
+
+
+.timeDisplay {
+	font-size: 12px;
+	color:grey;
 }
