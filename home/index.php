@@ -42,12 +42,12 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<span class="heading bold"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Your profile</span>
-		<img src="../images/Wallpaper.jpg" class="img-responsive photoHolder" alt="Cinque Terre" height="100" width="100">
+		<img src="../images/Wallpaper.jpg" class="img-responsive circle photoHolder" alt="Cinque Terre" height="100" width="100">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder">
-			<p class="bold"> userName </p>
+			<p class="bold"> @userName </p>
 			<p> firstName lastName</p>
 			<form method="post" action="editPage.php">
 			<input type="hidden" name="userName" value="userName"> 
@@ -66,14 +66,83 @@
 	</div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-8 col-lg-offset-1 col-lg-8 content"> 
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 repeat">
-				test	
+		<div class="row repeat"><!-- This the div that should be inside the loop when printing all posts-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+			<div class="row">
+				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
+				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive circle photoHolder">
+				</div>
+				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
+					<p><span class="postHead">@userName</span> posted: </p>  	
+					<p class="timeDisplay"> On, 16th Dec 1991 </p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<img src="../images/postTest.jpg" class="img-responsive photoHolder">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<p> Description of the post. This post could be arbitarily long so I am writing something random here to test it outside lol.</p> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+					<form method="post" action="">
+						<input type="hidden" name="like" value="postId">
+						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like</button>
+					</form>
+				</div>
+				<div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+				</div>
+				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+					<form method="post" action="">
+						<input type="hidden" name="comment" value="postId">
+						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
+					</form>
+				</div>
+			</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 repeat">
-				test	
+		<div class="row repeat"><!--Delete this after making backend, this should come inside a loop-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				
+			<div class="row">
+				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
+				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive circle photoHolder">
+				</div>
+				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
+					<p><span class="postHead">@userName</span> posted: </p>  	
+					<p class="timeDisplay"> On, 16th Dec 1991 </p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<img src="../images/testImage.jpe" class="img-responsive photoHolder">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<p> Description of the post. This post could be arbitarily long so I am writing something random here to test it outside lol.</p> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+					<form method="post" action="">
+						<input type="hidden" name="like" value="postId">
+						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button>
+					</form>
+				</div>
+				<div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+				</div>
+				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+					<form method="post" action="">
+						<input type="hidden" name="comment" value="postId">
+						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
+					</form>
+				</div>
+			</div>
 			</div>
 		</div>
 	</div>
