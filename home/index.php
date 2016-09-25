@@ -19,19 +19,18 @@
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#openNav" aria-expanded="false" id="expansion"><span id="targetArea" aria-hidden="true"></span></button>
 		</div>
 	<div class="container-fluid collapse navbar-collapse" id="openNav">
-			<ul class="nav navbar-nav">
-				<li class="active"><a><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
-				<li><a><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
-			</ul>
-			<form class="navbar-form navbar-left test">
-        <div class="form-group test">
-          <input type="text" class="form-control test" placeholder="Search for..."><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-        </div>
-      </form>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="logout"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
-				<li><a href="logout"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Log Out</a></li>
-			</ul>
+		<ul class="nav navbar-nav">
+			<li class="active"><a><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+			<li><a><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
+		</ul>
+		<form class="navbar-form navbar-left">
+			<input type="text" class="form-control" placeholder="Search for...">
+          	<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        </form>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="write"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
+			<li><a href="logout"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Log Out</a></li>
+		</ul>
 	</div>
 </nav>
 <div class="container-fluid">
