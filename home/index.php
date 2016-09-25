@@ -7,26 +7,26 @@
 	<!-- links to bootstrap & jQuery -->
 	<script src="../js/jquery-3.1.0.min.js"></script>
 	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" href=".../css/bootstrap-theme.min.css"> 
+	<link rel="stylesheet" href="../css/bootstrap-theme.min.css"> 
 	<script src="../js/bootstrap.min.js"></script>
-
+	<script src="../js/home.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/home.css">
 </head>
 <body>
 <nav class="navbar" >
-	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">Friend Zone</a>
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#openNav" aria-expanded="false" id="expansion"><span id="targetArea" aria-hidden="true"></span></button>
 		</div>
+	<div class="container-fluid collapse navbar-collapse" id="openNav">
 			<ul class="nav navbar-nav">
 				<li class="active"><a><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
 				<li><a><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
 			</ul>
-			<form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search for...">
+			<form class="navbar-form navbar-left test">
+        <div class="form-group test">
+          <input type="text" class="form-control test" placeholder="Search for..."><button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </div>
-        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
       </form>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="logout"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
