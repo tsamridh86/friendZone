@@ -61,6 +61,11 @@ nav{
 	font-weight: bolder;
 }
 
+.trending {
+	padding:5px;
+	margin:5px;
+}
+
 
 .timeDisplay {
 	font-size: 12px;

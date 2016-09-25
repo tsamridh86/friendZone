@@ -60,7 +60,21 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<span class="heading bold"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Now Trending</span><br>
-		posts
+		<div class="row trending">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<p><span class="postHead">@userName</span>  : we will show the top 3 most liked posts here, this is the most trending place. select post from table having max(like) or some query like that </p>
+			</div>
+		</div>
+		<div class="row trending">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<p><span class="postHead">@userName</span> : Description of the post. This post could be arbitarily long so I am writing something random here to test it outside lol. </p>
+			</div>
+		</div>
+		<div class="row trending">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<p><span class="postHead">@userName</span> : This div needs to be created with for loop. This is made to show that the text auto-aligns itself in the middle. </p>
+			</div>
+		</div>
 		</div>
 	</div>
 	</div>
@@ -124,7 +138,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<p> Description of the post. This post could be arbitarily long so I am writing something random here to test it outside lol.</p> 
+					<p> This div needs to be created with for loop. This is made to show that the image auto-aligns itself in the middle & i specially made a unlike button if some users want to unlike what they did.</p> 
 				</div>
 			</div>
 			<div class="row">
