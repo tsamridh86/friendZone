@@ -5,7 +5,7 @@ class Users{
 		$this->conn = $conn;
 	}
 	
-	public function isLogin($username, $password)
+	public function isLogin($userName, $password)
 	{
 		$password1 = md5($password);
 		$sql = "SELECT * FROM users WHERE userName = '$userName' AND password = '$password1'";
@@ -17,14 +17,14 @@ class Users{
 			return true;
 	}
 
-	public function is_signup($firstName, $lastName,$userName,$password,$photo)
+	public function isSignup($firstName, $lastName,$userName,$password)
 	{
 		$query2 = "SELECT userName from users where userName = '$userName'";
 		$password = md5($password);
 		$result2= $this->conn->query($query2);
 		if($result2->num_rows === 0)
 		{
-			$query1 = "INSERT INTO users(firstName,lastName,userName,password,profilePhoto) Values('$firstName','$lastName','$userName','$password','$photo')";
+			$query1 = "INSERT INTO users(firstName,lastName,userName,password) Values('$firstName','$lastName','$userName','$password')";
 			if($this->conn->query($query1))
 		{
 			return true;
