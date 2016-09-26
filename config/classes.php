@@ -42,6 +42,7 @@ class Users{
 
 	}
 
+
 	public function addPost($image, $description, $userId)
 	{
 		$date = date("Y-m-d");
@@ -99,6 +100,13 @@ class Users{
 
 	
 
+
+	public function logout()
+	{
+		unset($_SESSION["userName"]);
+		session_destroy();
+		echo "<script type='text/javascript'>alert('Succesfully Logout');window.location.href = '../index.php';</script>";
+	}
 }
 
 

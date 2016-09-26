@@ -1,6 +1,7 @@
 <?php
 require_once 'config/connect.php';
 require_once 'config/classes.php';
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,9 +23,6 @@ require_once 'config/classes.php';
 		<div class="navbar-header">
 			<a class="navbar-brand" href="#">Friend Zone</a>
 		</div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
-			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="" data-toggle="modal" data-target="#signUpWindow"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Sign Up</a></li>
 				<li><a href="" data-toggle="modal" data-target="#loginWindow"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Login</a></li>
@@ -85,14 +83,6 @@ require_once 'config/classes.php';
 	</div>
 	</div>
 </div>
-	<!-- after the sign up warning symbols, use these with php to create maximum effect-->
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-	<div class="alert alert-success" role="alert">Account creation successful. Login to continue.</div>
-	<div class="alert alert-danger" role="alert">The user name is taken. Please try another one.</div>
-	<div class="alert alert-danger" role="alert">The user name or password does not match. Please try again.</div>
-		</div>
-	</div>
 </body>
 </html>
 <?php
@@ -122,7 +112,8 @@ if(isset($_POST['login']))
 	$isLogin = $user->isLogin($userName,$password);
 	if($isLogin === true)
 	{
-		header('location:/home/index.php');
+		$_SESSION['userName'] = $userName;
+		header('location:/friendzone/home/index.php');
 	}
 	else
 	{
