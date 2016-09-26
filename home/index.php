@@ -1,4 +1,18 @@
 <!--This is for the home page after the user has logged in-->
+<?php
+require_once '../config/connect.php';
+require_once '../config/classes.php';
+session_start();
+if(!isset($_SESSION["userName"]))
+{
+	header('Location:../index.php');
+}
+if(isset($_GET['logout']))
+{
+$users = new Users($conn);
+$users->logout();
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +43,7 @@
         </form>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="#" data-toggle="modal" data-target="#writeWindow"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
-			<li><a href="logout"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Log Out</a></li>
+			<li><a href="index.php?logout"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Log Out</a></li>
 		</ul>
 	</div>
 </nav>
@@ -199,5 +213,6 @@
 	</div>
 	</div>
 </div>
+
 </body>
 </html>

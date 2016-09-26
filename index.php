@@ -1,6 +1,7 @@
 <?php
 require_once 'config/connect.php';
 require_once 'config/classes.php';
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -111,7 +112,8 @@ if(isset($_POST['login']))
 	$isLogin = $user->isLogin($userName,$password);
 	if($isLogin === true)
 	{
-		header('location:/home/index.php');
+		$_SESSION['userName'] = $userName;
+		header('location:/friendzone/home/index.php');
 	}
 	else
 	{
