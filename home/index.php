@@ -61,10 +61,13 @@
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 			<div class="row">
 				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
+				<!--This is the user photo-->
 				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive circle photoHolder">
 				</div>
 				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-					<p><span class="postHead">@userName</span> posted: </p>  	
+					<p><span class="postHead">@userName</span> posted: 
+						<button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button>
+					</p>  	
 					<p class="timeDisplay"> On, 16th Dec 1991 </p>
 				</div>
 			</div>
@@ -85,9 +88,7 @@
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like</button>
 					</form>
 				</div>
-				<div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
 					<form method="post" action="">
 						<input type="hidden" name="comment" value="postId">
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
@@ -125,9 +126,7 @@
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button>
 					</form>
 				</div>
-				<div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
 					<form method="post" action="">
 						<input type="hidden" name="comment" value="postId">
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
@@ -137,7 +136,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3 col-lg-3">
+	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 		<div class="profile">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
