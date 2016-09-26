@@ -28,7 +28,7 @@
           	<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="write"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
+			<li><a href="write.php"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
 			<li><a href="logout"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Log Out</a></li>
 		</ul>
 	</div>

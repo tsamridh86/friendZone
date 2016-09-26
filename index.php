@@ -76,11 +76,6 @@ require_once 'config/classes.php';
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-			<input type="file" name="profilePic" class="form-control" required="required" placeholder="Profile Photo">
-		</div>
-	</div>
-	<div class="row">
 		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 			<button type="submit" class="btn btn-primary">Sign Up</button>
 		</div>
