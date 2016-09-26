@@ -41,6 +41,64 @@ class Users{
 		
 
 	}
+
+	public function addPost($image, $description, $userId)
+	{
+		$date = date("Y-m-d");
+		$img = "images/".$image;
+		$sql1 = "INSERT INTO post(userId, description, img, createdOn) VALUES('$userId', '$description', '$img', '$date')";
+		$result = $this->conn->query($sql1);
+
+		if (!$result)
+			return false;
+		else
+			return true;
+	}
+
+	public function likes($userId, $postId)
+	{
+		$sql = "SELECT * FROM likes WHERE postId = '$postId' AND userId = '$userId'";
+		$result = $this->conn->query($sql);
+
+		if($result->num_rows == 0)
+		{
+			$sql = "INSERT INTO likes VALUES ('$postId', '$userId')";
+			$result = $this->conn->query($sql);
+
+			if(!$result)
+				return false;
+			else
+				return true;
+		}
+		else
+		{
+			$sql = "DELETE FROM likes WHERE postId = '$postId' AND userId = '$userId'";
+			$result = $this->conn->query($sql);
+
+			if(!$result)
+				return false;
+			else
+				return true;
+		}
+		
+
+	}
+
+	public function addComment($postId, $userId, $description, $image)
+	{
+		$img = "images/".$image;
+		$date = date("Y-m-d");
+		$sql = "INSERT INTO comments(postId, userId, description, img, createdOn) VALUES('postId', $userId', '$description', '$img', '$date')";
+		$result = $this->conn->query($sql);
+
+		if (!$result)
+			return false;
+		else
+			return true;
+	}
+
+	
+
 }
 
 
