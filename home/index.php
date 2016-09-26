@@ -62,9 +62,9 @@ $users->logout();
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder">
 			<p class="bold"> @userName </p>
 			<p> firstName lastName</p>
-			<form method="post" action="editPage.php">
+			<form method="post" action="editProfile.php">
 			<input type="hidden" name="userName" value="userName"> 
-			<button type="button" class="btn btn-default">Edit Profile</button>
+			<button type="submit" class="btn btn-default">Edit Profile</button>
 			</form>
 		</div>
 	</div>
