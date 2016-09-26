@@ -55,30 +55,8 @@
 		</div>
 	</div>
 	</div>
-	<div class="profile">
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<span class="heading bold"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Now Trending</span><br>
-		<div class="row trending">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<p><span class="postHead">@userName</span>  : we will show the top 3 most liked posts here, this is the most trending place. select post from table having max(like) or some query like that </p>
-			</div>
-		</div>
-		<div class="row trending">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<p><span class="postHead">@userName</span> : Description of the post. This post could be arbitarily long so I am writing something random here to test it outside lol. </p>
-			</div>
-		</div>
-		<div class="row trending">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<p><span class="postHead">@userName</span> : This div needs to be created with for loop. This is made to show that the text auto-aligns itself in the middle. </p>
-			</div>
-		</div>
-		</div>
 	</div>
-	</div>
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-8 col-lg-offset-1 col-lg-8 content"> 
+	<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content"> 
 		<div class="row repeat"><!-- This the div that should be inside the loop when printing all posts-->
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 			<div class="row">
@@ -101,7 +79,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 					<form method="post" action="">
 						<input type="hidden" name="like" value="postId">
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like</button>
@@ -109,7 +87,7 @@
 				</div>
 				<div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 				</div>
-				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 					<form method="post" action="">
 						<input type="hidden" name="comment" value="postId">
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
@@ -141,7 +119,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 					<form method="post" action="">
 						<input type="hidden" name="like" value="postId">
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button>
@@ -149,7 +127,7 @@
 				</div>
 				<div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 				</div>
-				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 					<form method="post" action="">
 						<input type="hidden" name="comment" value="postId">
 						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
@@ -158,6 +136,30 @@
 			</div>
 			</div>
 		</div>
+	</div>
+	<div class="col-md-3 col-lg-3">
+		<div class="profile">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<span class="heading bold"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Now Trending</span><br>
+		<div class="row trending">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<p><span class="postHead">@userName</span>  : we will show the top 3 most liked posts here, this is the most trending place. select post from table having max(like) or some query like that </p>
+			</div>
+		</div>
+		<div class="row trending">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<p><span class="postHead">@userName</span> : Description of the post. This post could be arbitarily long so I am writing something random here to test it outside lol. </p>
+			</div>
+		</div>
+		<div class="row trending">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<p><span class="postHead">@userName</span> : This div needs to be created with for loop. This is made to show that the text auto-aligns itself in the middle. </p>
+			</div>
+		</div>
+		</div>
+	</div>
+	</div>
 	</div>
 </div>
 </div>
