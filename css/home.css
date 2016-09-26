@@ -38,6 +38,8 @@ nav{
 
 .content {
 	padding:10px;
+	margin-left: 35px;
+	margin-right: 35px;
 }
 
 .repeat {
@@ -83,4 +85,23 @@ nav .active {
 @font-face {
 	font-family: openSans;
 	src:url(../fonts/OpenSans-Regular.ttf);
+}
+
+.upper {
+	margin-left:15px;
+	margin-right:15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.upper button a {
+	color:red;
+}
+
+.upper a {
+	text-decoration: none;
+}
+
+hr {
+	margin-top: 0px;
 }
