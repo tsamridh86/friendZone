@@ -43,10 +43,16 @@ class Users{
 	}
 
 
-	public function addPost($image, $description, $userId)
+	public function addPost($image, $description, $userName)
 	{
 		$date = date("Y-m-d");
 		$img = "images/".$image;
+
+		$sql = "SELECT userId from users WHERE userName = '$userName'";
+		$result = $this->conn->query($sql);
+		$userR = $result->fetch_assoc();
+		$userId = $userR['userId'];
+
 		$sql1 = "INSERT INTO post(userId, description, img, createdOn) VALUES('$userId', '$description', '$img', '$date')";
 		$result = $this->conn->query($sql1);
 
