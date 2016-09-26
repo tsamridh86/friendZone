@@ -28,7 +28,7 @@
           	<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="write.php"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
+			<li><a href="#" data-toggle="modal" data-target="#writeWindow"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
 			<li><a href="logout"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Log Out</a></li>
 		</ul>
 	</div>
@@ -162,6 +162,43 @@
 	</div>
 	</div>
 </div>
+</div>
+<div class="modal fade" id="writeWindow">
+	<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">x</button>
+		<h3> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</h3>
+	</div>
+	<div class="modal-body">
+		<form action="" method="POST" role="form">
+			
+			<div class="row postWrite">
+				<div class="col-xs-5 col-sm-5 col-md-4 col-lg-4 postHead">
+					<span class="glyphicon glyphicon-list" aria-hidden="true"></span>  Description :
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+					<textarea name="description" class="form-control" rows="2" required="required"></textarea>
+				</div>
+			</div>
+			<div class="row postWrite">
+				<div class="col-xs-5 col-sm-5 col-md-4 col-lg-4 postHead">
+					<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>  Add a photo :
+				</div>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<input type="file" name="image">
+				</div>
+			</div>
+			<div class="row postWrite">
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Post</button>
+				</div>
+			</div>
+		
+		</form>
+	</div>
+	</div>
+	</div>
 </div>
 </body>
 </html>
