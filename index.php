@@ -42,7 +42,7 @@ require_once 'config/classes.php';
 		<form action="" method="POST" role="form">
 			<input type="text" name="userName" class="form-control" required="required" placeholder="User Name">
 			<input type="password" name="password" class="form-control" required="required" placeholder="Password">
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary" name="login">Submit</button>
 		</form>
 	</div>
 	</div>
@@ -77,7 +77,7 @@ require_once 'config/classes.php';
 	</div>
 	<div class="row">
 		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-			<button type="submit" class="btn btn-primary">Sign Up</button>
+			<button type="submit" class="btn btn-primary" name="signup">Sign Up</button>
 		</div>
 	</div>
 	</form>
@@ -97,4 +97,36 @@ require_once 'config/classes.php';
 </html>
 <?php
 $user = new Users($conn);
+if(isset($_POST['signup']))
+{
+$userName=$_POST["userName"];
+$firstName=$_POST["firstName"];
+$lastName=$_POST["lastName"];
+$password=$_POST["password"];
+$isSignup = $user->isSignup($firstName,$lastName,$userName,$password);
+if($isSignup === true)
+{
+	echo "<script type='text/javascript'>alert('Successfully Signed Up');window.location.href = 'index.php';</script>";
+}
+elseif ($isSignup == "Username already exists") {
+	echo "<script type='text/javascript'>alert('Username already exists');window.location.href = 'index.php';</script>";	
+}
+else{
+		echo "<script type='text/javascript'>alert('Something went wrong');window.location.href = 'index.php';</script>";
+}
+}
+if(isset($_POST['login']))
+{
+	$userName=$_POST["userName"];
+	$password=$_POST["password"];
+	$isLogin = $user->isLogin($userName,$password);
+	if($isLogin === true)
+	{
+		header('location:/home/index.php');
+	}
+	else
+	{
+		echo "<script type='text/javascript'>alert('Wrong user Credentials');window.location.href = 'index.php';</script>";
+	}
+}
 ?>
