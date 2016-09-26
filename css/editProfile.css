@@ -1,0 +1,14 @@
+.exit
+{
+	text-decoration: none;
+	margin: 10px;
+	text-align: center;
+}
+
+.exit a {
+	color:red;
+}
+
+.heading {
+	margin:10px;	
+}
