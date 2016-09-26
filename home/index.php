@@ -184,7 +184,7 @@ $users->logout();
 		<h3> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</h3>
 	</div>
 	<div class="modal-body">
-		<form action="" method="POST" role="form">
+		<form action="" method="POST" role="form" enctype="multipart/form-data">
 			
 			<div class="row postWrite">
 				<div class="col-xs-5 col-sm-5 col-md-4 col-lg-4 postHead">
@@ -200,11 +200,11 @@ $users->logout();
 				</div>
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 					<input type="file" name="image">
-				</div>
+				</div> 
 			</div>
 			<div class="row postWrite">
 				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Post</button>
+					<button type="submit" class="btn btn-default" name="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Post</button>
 				</div>
 			</div>
 		
@@ -216,3 +216,33 @@ $users->logout();
 
 </body>
 </html>
+
+<?php
+
+if(isset($_POST['submit']))
+{
+
+	$user = new Users($conn);
+	$description = $_POST["description"];
+
+	 $file="../images/".$_FILES["image"]["name"];
+	 $temp_name = $_FILES['image']['tmp_name'];
+	 move_uploaded_file($temp_name, $file);
+	 $img_name = addslashes($_FILES['image']['name']);
+
+	$userName = $_SESSION["userName"];
+
+	$postFlag = $user->addPost($img_name, $description, $userName);
+
+	if($postFlag === true)
+	{
+		echo "<script type='text/javascript'>alert('Post successfully added');window.location.href = 'index.php';</script>";
+	}
+	else
+	{
+		echo "<script type='text/javascript'>alert('Post not added');window.location.href = 'index.php';</script>";
+	}
+
+}
+
+?>
