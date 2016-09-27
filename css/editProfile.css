@@ -31,3 +31,7 @@
 	font-family: openSans;
 	src:url(../fonts/OpenSans-Regular.ttf);
 }
+
+.postWrite button {
+	color:green;
+}
