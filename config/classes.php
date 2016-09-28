@@ -113,7 +113,70 @@ class Users{
 		session_destroy();
 		echo "<script type='text/javascript'>alert('Succesfully Logout');window.location.href = '../index.php';</script>";
 	}
+	public function getPosts($userName)
+	{
+		$sql = "SELECT userId from users WHERE userName = '$userName'";
+		$result = $this->conn->query($sql);
+		$userR = $result->fetch_assoc();
+		$userId = $userR['userId'];
+		if($userId)
+		{
+			$query1="SELECT user2 from follows WHERE user1='$userId'";
+			$result1 = $this->conn->query($query1);
+			if($result1)
+			{
+				$user2='';
+				while ($row=$result1->fetch_assoc()) {
+					$user2=$user2.$row['user2'];
+					$user2=$user2.'$';//delimeter between userIds
+				}
+				$user2Id=explode('$',$user2);//converted into array
+				$query2="SELECT userId,description,img,createdOn from post WHERE userId='$user2Id[0]'";
+				if(count($user2Id)>1)//check if only one user then
+				{
+					$i=1;
+					while ($i < count($user2Id)) {
+						$query2=$query2."OR userId='$user2Id[$i]'";
+						$i=$i+1;
+					}
+					$query2=$query2."ORDER BY createdOn DESC";
+				}
+				$result2=$this->conn->query($query2);
+				if($result2){
+					$posts=array("index"=>array(
+								 "userId"=>'',
+								"description"=>'',
+								"img"=>'',
+								"createdOn"=>''));
+					$i=0;
+					while ($row=$result2->fetch_assoc()) {
+						$posts[$i]['userId']=$row['userId'];
+						$posts[$i]['description'] = $row['description'];
+						$posts[$i]['img'] = $row['img'];
+						$posts[$i]['createdOn']=$row['createdOn'];
+						$i=$i+1;
+					}
+					return $posts;
+				}
+				else{
+					return "something went wrong";
+				}
+			}
+			else{
+				return "Follow Someone";
+			}
+
+		}
+		else {
+			return "No id found";
+		}
+
+	}
+	public function getProfile($userId)
+	{
+		$query="SELECT firstName,lastName,userName,profilePhoto from users where userId='$userId'";
+		$result = $this->conn->query($query);
+		$profile=$result->fetch_assoc();
+		return $profile;
+	}
 }
-
-
-?>

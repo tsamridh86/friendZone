@@ -70,112 +70,75 @@ $users->logout();
 	</div>
 	</div>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content"> 
-		<div class="row repeat"><!-- This the div that should be inside the loop when printing all posts-->
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-			<div class="row">
-				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
-				<!--This is the user photo-->
-				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive circle photoHolder">
+
+<?php
+$user = new Users($conn);
+$posts=$user->getPosts($_SESSION['userName']);
+
+$i=0;
+if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "No id found")
+{	
+	echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content">';
+	while ($i < count($posts)-1) {
+		
+		$profile = $user->getProfile($posts[$i]['userId']);
+		echo ' 
+			<div class="row repeat">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+				<div class="row">
+					<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
+					<!--This is the user photo-->';
+
+					echo '<img src="'.$profile["profilePhoto"].'"  width = "80" class="img-responsive circle photoHolder">
+					</div>
+					<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
+						<p><span class="postHead">'.$profile["userName"].'</span> posted: 
+							<button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button>
+						</p>  	
+						<p class="timeDisplay">'.$posts[$i]["createdOn"].'</p>
+					</div>
 				</div>
-				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-					<p><span class="postHead">@userName</span> posted: 
-						<button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button>
-					</p>  	
-					<p class="timeDisplay"> On, 16th Dec 1991 </p>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<img src="'.$posts[$i]['img'].'" class="img-responsive photoHolder">
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<img src="../images/postTest.jpg" class="img-responsive photoHolder">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<p> '.$posts[$i]["description"].'</p> 
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<p> Description of the post. This post could be arbitarily long so I am writing something random here to test it outside lol.</p> 
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+						<form method="post" action="">
+							<input type="hidden" name="like" value="postId">
+							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like</button>
+						</form>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
+						<form method="post" action="">
+							<input type="hidden" name="comment" value="postId">
+							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
+						</form>
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<form method="post" action="">
-						<input type="hidden" name="like" value="postId">
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like</button>
-					</form>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
-					<form method="post" action="">
-						<input type="hidden" name="comment" value="postId">
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
-					</form>
-				</div>
-			</div>
-			</div>
-		</div>
-		<div class="row repeat"><!--Delete this after making backend, this should come inside a loop-->
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				
-			<div class="row">
-				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
-				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive circle photoHolder">
-				</div>
-				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-					<p><span class="postHead">@userName</span> posted: </p>  	
-					<p class="timeDisplay"> On, 16th Dec 1991 </p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<img src="../images/testImage.jpe" class="img-responsive photoHolder">
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<p> This div needs to be created with for loop. This is made to show that the image auto-aligns itself in the middle & i specially made a unlike button if some users want to unlike what they did.</p> 
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<form method="post" action="">
-						<input type="hidden" name="like" value="postId">
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button>
-					</form>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
-					<form method="post" action="">
-						<input type="hidden" name="comment" value="postId">
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
-					</form>
-				</div>
-			</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-		<div class="profile">
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<span class="heading bold"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span> Now Trending</span><br>
-		<div class="row trending">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<p><span class="postHead">@userName</span>  : we will show the top 3 most liked posts here, this is the most trending place. select post from table having max(like) or some query like that </p>
-			</div>
-		</div>
-		<div class="row trending">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<p><span class="postHead">@userName</span> : Description of the post. This post could be arbitarily long so I am writing something random here to test it outside lol. </p>
-			</div>
-		</div>
-		<div class="row trending">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<p><span class="postHead">@userName</span> : This div needs to be created with for loop. This is made to show that the text auto-aligns itself in the middle. </p>
-			</div>
-		</div>
-		</div>
-	</div>
-	</div>
-	</div>
-</div>
-</div>
+			';
+			$i = $i+1;
+	}
+echo '</div>';
+}
+else if($posts == "No id found" || $posts != "something went wrong" )
+{
+	echo '<div class="alert alert-danger">Something is not right</div>';
+}
+else if($posts == "Follow Someone")
+{
+	echo '<div class="alert alert-info">Follow Someone</div>';
+}
+?>
+		<!-- <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button> -->
 <div class="modal fade" id="writeWindow">
 	<div class="modal-dialog">
 	<div class="modal-content">
@@ -222,7 +185,7 @@ $users->logout();
 if(isset($_POST['submit']))
 {
 
-	$user = new Users($conn);
+	
 	$description = $_POST["description"];
 
 	 $file="../images/".$_FILES["image"]["name"];
