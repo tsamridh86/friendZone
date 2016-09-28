@@ -37,13 +37,13 @@ $users->logout();
 			<li class="active"><a><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
 			<li><a><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
 		</ul>
-		<form class="navbar-form navbar-left">
+		<form class="navbar-form navbar-left" method="get" action="search.php">
 			<input type="text" class="form-control" placeholder="Search for...">
           	<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="#" data-toggle="modal" data-target="#writeWindow"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
-			<li><a href="index.php?logout"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Log Out</a></li>
+			<li><a href="index.php?logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
 		</ul>
 	</div>
 </nav>

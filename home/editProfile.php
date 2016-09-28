@@ -89,7 +89,7 @@ $image = $row['profilePhoto'];
 			Profile Photo : 
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<input type="file" name="profilePhoto" value="password" class="form-control" placeholder="Profile Photo">
+			<input type="file" name="profilePhoto" class="form-control" placeholder="Profile Photo">
 		</div>
 	</div>
 	<div class="row">
