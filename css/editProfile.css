@@ -1,0 +1,37 @@
+.exit
+{
+	text-decoration: none;
+	margin: 10px;
+	text-align: center;
+}
+
+.exit a {
+	color:red;
+}
+
+.heading {
+	margin:10px;	
+}
+
+.okay {
+	color:green;
+}
+
+.desc {
+	font-weight: bold;
+	font-family: openSans;
+
+}
+
+.editor .row {
+	margin: 5px;
+}
+
+@font-face {
+	font-family: openSans;
+	src:url(../fonts/OpenSans-Regular.ttf);
+}
+
+.postWrite button {
+	color:green;
+}

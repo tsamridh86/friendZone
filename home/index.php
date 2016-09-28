@@ -46,13 +46,13 @@ $image = $row['profilePhoto'];
 			<li class="active"><a><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
 			<li><a><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
 		</ul>
-		<form class="navbar-form navbar-left">
+		<form class="navbar-form navbar-left" method="get" action="search.php">
 			<input type="text" class="form-control" placeholder="Search for...">
           	<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="#" data-toggle="modal" data-target="#writeWindow"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
-			<li><a href="index.php?logout"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Log Out</a></li>
+			<li><a href="index.php?logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
 		</ul>
 	</div>
 </nav>
@@ -64,16 +64,17 @@ $image = $row['profilePhoto'];
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<span class="heading bold"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Your profile</span>
-		<img src="$image" class="img-responsive circle photoHolder" alt="Cinque Terre" height="100" width="100">
+		<img src="<?php echo $image; ?>" class="img-responsive circle photoHolder" alt="Cinque Terre" height="100" width="100">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder">
 			<p class="bold"><?php echo $userName; ?></p>
 			<p><?php echo $firstName.$lastName; ?></p>
-			<form method="post" action="editPage.php">
+			<form method="post" action="editProfile.php">
+
 			<input type="hidden" name="userName" value="userName"> 
-			<button type="button" class="btn btn-default">Edit Profile</button>
+			<button type="submit" class="btn btn-default">Edit Profile</button>
 			</form>
 		</div>
 	</div>
@@ -134,7 +135,7 @@ $image = $row['profilePhoto'];
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<img src="../images/testImage.jpe" class="img-responsive photoHolder">
+					<img src="../images/testImage.jpg" class="img-responsive photoHolder">
 				</div>
 			</div>
 			<div class="row">
@@ -234,10 +235,10 @@ if(isset($_POST['submit']))
 	$user = new Users($conn);
 	$description = $_POST["description"];
 
-	 $file="../images/".$_FILES["image"]["name"];
-	 $temp_name = $_FILES['image']['tmp_name'];
-	 move_uploaded_file($temp_name, $file);
-	 $img_name = addslashes($_FILES['image']['name']);
+	$file="../images/".$_FILES["image"]["name"];
+	$temp_name = $_FILES['image']['tmp_name'];
+	move_uploaded_file($temp_name, $file);
+	$img_name = addslashes($_FILES['image']['name']);
 
 	$userName = $_SESSION["userName"];
 

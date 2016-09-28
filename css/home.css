@@ -1,14 +1,14 @@
 nav{
-	background: #f3f3f3;
-	box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.50);		
+
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.75);		
 }
 
 .profile{
 	margin-top: 15px;
 	padding-top: 10px;
 	font-family: "calibri";
-	box-shadow: 4px 4px 3px 2px rgba(0,0,0,0.75);
-	background: #f3f3f3;
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.75);
+	
 }
 
 .textHolder {
@@ -44,10 +44,9 @@ nav{
 
 .repeat {
 	padding: 10px;
-	margin: 7px;
+	margin: 10px;
 	font-family: openSans;
-	box-shadow: 4px 4px 3px 2px rgba(0,0,0,0.75);
-	background: #f3f3f3;
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.75);
 }
 
 .repeat .row {
@@ -90,3 +89,4 @@ nav .active {
 .postWrite{
 	margin:5px;
 }
+

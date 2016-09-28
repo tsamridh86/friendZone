@@ -25,7 +25,7 @@ session_start();
 		</div>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="" data-toggle="modal" data-target="#signUpWindow"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Sign Up</a></li>
-				<li><a href="" data-toggle="modal" data-target="#loginWindow"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Login</a></li>
+				<li><a href="" data-toggle="modal" data-target="#loginWindow"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</a></li>
 			</ul>
 	</div>
 </nav>
@@ -34,7 +34,7 @@ session_start();
 	<div class="modal-content">
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">x</button>
-		<h3> <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> Login</h3>
+		<h3> <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login</h3>
 	</div>
 	<div class="modal-body">
 		<form action="" method="POST" role="form">
