@@ -32,7 +32,7 @@
 			First Name :
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<input type="text" name="firstName" value="firstName" class="form-control" placeholder="First Name">
+			<input type="text" name="firstName" class="form-control" placeholder="First Name">
 		</div> 
 	</div>
 	<div class="row">
@@ -40,7 +40,7 @@
 			Last Name : 
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<input type="text" name="lastName" value="lastName" class="form-control" placeholder="Last Name">
+			<input type="text" name="lastName" class="form-control" placeholder="Last Name">
 		</div>
 	</div>
 	<div class="row">
@@ -48,7 +48,7 @@
 			Password : 
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<input type="password" name="password" value="password" class="form-control" placeholder="Password">
+			<input type="password" name="password" class="form-control" placeholder="Password">
 		</div>
 	</div>
 	<div class="row">
@@ -64,7 +64,7 @@
 			Profile Photo : 
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<input type="file" name="profilePhoto" value="password" class="form-control" placeholder="Profile Photo">
+			<input type="file" name="profilePhoto" class="form-control" placeholder="Profile Photo">
 		</div>
 	</div>
 	<div class="row">
