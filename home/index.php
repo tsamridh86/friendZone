@@ -12,6 +12,15 @@ if(isset($_GET['logout']))
 $users = new Users($conn);
 $users->logout();
 }
+
+$userName = $_SESSION["userName"];
+$user = new Users($conn);
+
+$row = $user->getProfile($userName);
+$firstName = $row['firstName'];
+$lastName = $row['lastName'];
+$image = $row['profilePhoto'];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,13 +64,13 @@ $users->logout();
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<span class="heading bold"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Your profile</span>
-		<img src="../images/Wallpaper.jpg" class="img-responsive circle photoHolder" alt="Cinque Terre" height="100" width="100">
+		<img src="$image" class="img-responsive circle photoHolder" alt="Cinque Terre" height="100" width="100">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder">
-			<p class="bold"> @userName </p>
-			<p> firstName lastName</p>
+			<p class="bold"><?php echo $userName; ?></p>
+			<p><?php echo $firstName.$lastName; ?></p>
 			<form method="post" action="editPage.php">
 			<input type="hidden" name="userName" value="userName"> 
 			<button type="button" class="btn btn-default">Edit Profile</button>
