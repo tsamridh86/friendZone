@@ -43,7 +43,7 @@ $users->logout();
         </form>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="#" data-toggle="modal" data-target="#writeWindow"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
-			<li><a href="index.php?logout"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Log Out</a></li>
+			<li><a href="index.php?logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
 		</ul>
 	</div>
 </nav>
