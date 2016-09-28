@@ -42,11 +42,34 @@ class Users{
 
 	}
 
+	public function getProfile($userName)
+	{
+		$sql = "SELECT * FROM users WHERE userName = '$userName'";
+		$result = $this->conn->query($sql);
+
+		$row = $result->fetch_assoc();
+
+		return $row;
+	}
+
+	public function editProfile($firstName, $lastName, $userName, $password, $image)
+	{
+		$img = "../images/".$image;
+		$sql = "UPDATE users SET firstName = '$firstName', lastName = '$lastName', password = '$password', profilePhoto = '$img' WHERE userName = '$userName'";
+		$result = $this->conn->query($sql);
+		
+		if(!$result)
+			return false;
+		else
+			return true;
+
+	}
+
 
 	public function addPost($image, $description, $userName)
 	{
 		$date = date("Y-m-d");
-		$img = "images/".$image;
+		$img = "../images/".$image;
 
 		$sql = "SELECT userId from users WHERE userName = '$userName'";
 		$result = $this->conn->query($sql);

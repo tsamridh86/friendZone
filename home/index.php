@@ -225,17 +225,10 @@ if(isset($_POST['submit']))
 	$user = new Users($conn);
 	$description = $_POST["description"];
 
-<<<<<<< HEAD
 	$file="../images/".$_FILES["image"]["name"];
 	$temp_name = $_FILES['image']['tmp_name'];
 	move_uploaded_file($temp_name, $file);
 	$img_name = addslashes($_FILES['image']['name']);
-=======
-	 $file="../images/".$_FILES["image"]["name"];
-	 $temp_name = $_FILES['image']['tmp_name'];
-	 move_uploaded_file($temp_name, $file);
-	 $img_name = addslashes($_FILES['image']['name']);
->>>>>>> shivang
 
 	$userName = $_SESSION["userName"];
 

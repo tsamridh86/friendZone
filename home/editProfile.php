@@ -1,3 +1,28 @@
+<?php
+require_once '../config/connect.php';
+require_once '../config/classes.php';
+session_start();
+if(!isset($_SESSION["userName"]))
+{
+	header('Location:../index.php');
+}
+if(isset($_GET['logout']))
+{
+$users = new Users($conn);
+$users->logout();
+}
+
+$userName = $_SESSION["userName"];
+$user = new Users($conn);
+
+$row = $user->getProfile($userName);
+$firstName = $row['firstName'];
+$lastName = $row['lastName'];
+$password = $row['password'];
+$image = $row['profilePhoto'];
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +57,7 @@
 			First Name :
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<input type="text" name="firstName" value="firstName" class="form-control" placeholder="First Name">
+			<input type="text" name="firstName" value="<?php echo $firstName; ?>" class="form-control" placeholder="First Name">
 		</div> 
 	</div>
 	<div class="row">
@@ -40,7 +65,7 @@
 			Last Name : 
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<input type="text" name="lastName" value="lastName" class="form-control" placeholder="Last Name">
+			<input type="text" name="lastName" value="<?php echo $lastName; ?>" class="form-control" placeholder="Last Name">
 		</div>
 	</div>
 	<div class="row">
@@ -48,7 +73,7 @@
 			Password : 
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<input type="password" name="password" value="password" class="form-control" placeholder="Password">
+			<input type="password" name="password" class="form-control" placeholder="Enter new Password">
 		</div>
 	</div>
 	<div class="row">
@@ -56,7 +81,7 @@
 			Current Profile Photo :
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<img src="../images/wallpaper.jpg" class="img-responsive" width="100">
+			<img src="<?php echo $image; ?>" class="img-responsive" width="100">
 		</div>
 	</div>
 	<div class="row">
@@ -69,10 +94,41 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-			<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok okay" aria-hidden="true"></span> Save Changes</button>
+			<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok okay" aria-hidden="true"></span> Save Changes</button>
 		</div>
 	</div>
 </form>
 </div>
 </body>
 </html>
+
+<?php
+
+
+$user = new Users($conn);
+if(isset($_POST["firstName"]))
+{
+	$firstName = $_POST["firstName"];
+	$lastName = $_POST["lastName"];
+	$password1 = $_POST["password"];
+
+	if(empty($password1))
+		$password1 = $password;
+
+	$file="../images/".$_FILES["profilePhoto"]["name"];
+	$temp_name = $_FILES['profilePhoto']['tmp_name'];
+	move_uploaded_file($temp_name, $file);
+	$img_name = addslashes($_FILES['profilePhoto']['name']);
+
+	$profile = $user->editProfile($firstName, $lastName, $userName, $password1, $img_name);
+
+	if($profile === true)
+	{
+		echo "<script type='text/javascript'>alert('Profile Updated.');window.location.href = 'editProfile.php';</script>";
+	}
+	else
+	{
+		echo "<script type='text/javascript'>alert('Problem updating profile.');window.location.href = 'editProfile.php';</script>";
+	}
+}
+?>
