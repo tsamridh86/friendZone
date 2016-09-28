@@ -76,7 +76,7 @@ $users->logout();
 			<div class="row">
 				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
 				<!--This is the user photo-->
-				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive circle photoHolder">
+				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive photoHolder">
 				</div>
 				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
 					<p><span class="postHead">@userName</span> posted: 
@@ -116,7 +116,7 @@ $users->logout();
 				
 			<div class="row">
 				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
-				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive circle photoHolder">
+				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive photoHolder">
 				</div>
 				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
 					<p><span class="postHead">@userName</span> posted: </p>  	
