@@ -69,8 +69,8 @@ $image = $row['profilePhoto'];
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder">
-			<p class="bold"><?php echo $userName; ?></p>
-			<p><?php echo $firstName.$lastName; ?></p>
+			<p class="bold"><?php echo "@".$userName; ?></p>
+			<p><?php echo $firstName."  ".$lastName; ?></p>
 			<form method="post" action="editProfile.php">
 
 			<input type="hidden" name="userName" value="userName"> 
