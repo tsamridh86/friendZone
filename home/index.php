@@ -36,14 +36,14 @@ $image = $row['profilePhoto'];
 	<link rel="stylesheet" type="text/css" href="../css/home.css">
 </head>
 <body>
-<nav class="navbar" >
+<nav class="navbar navbar-fixed-top coloring" >
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Friend Zone</a>
+			<a class="navbar-brand" href="#" onclick="#profile">Friend Zone</a>
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#openNav" aria-expanded="false" id="expansion"><span id="targetArea" aria-hidden="true"></span></button>
 		</div>
 	<div class="container-fluid collapse navbar-collapse" id="openNav">
 		<ul class="nav navbar-nav">
-			<li class="active"><a><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+			<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
 			<li><a><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
 		</ul>
 		<form class="navbar-form navbar-left" method="get" action="search.php">
@@ -51,6 +51,7 @@ $image = $row['profilePhoto'];
           	<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
 		<ul class="nav navbar-nav navbar-right">
+
 			<li><a href="#" data-toggle="modal" data-target="#writeWindow"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Write a Post</a></li>
 			<li><a href="index.php?logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
 		</ul>
@@ -60,7 +61,7 @@ $image = $row['profilePhoto'];
 	
 <div class="row outer">
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-	<div class="profile">
+	<div class="profile" id="profile">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<span class="heading bold"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Your profile</span>
