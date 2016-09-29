@@ -16,7 +16,7 @@ $users->logout();
 $userName = $_SESSION["userName"];
 $user = new Users($conn);
 
-$row = $user->getProfile($userName);
+$row = $user->getProfileByUserName($userName);
 $firstName = $row['firstName'];
 $lastName = $row['lastName'];
 $image = $row['profilePhoto'];
@@ -92,7 +92,7 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 	echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content">';
 	while ($i < count($posts)-1) {
 		
-		$profile = $user->getProfile($posts[$i]['userId']);
+		$profile = $user->getProfileByUserId($posts[$i]['userId']);
 		echo ' 
 			<div class="row repeat">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">

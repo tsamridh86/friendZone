@@ -15,7 +15,7 @@ $users->logout();
 $userName = $_SESSION["userName"];
 $user = new Users($conn);
 
-$row = $user->getProfile($userName);
+$row = $user->getProfileByUserName($userName);
 $firstName = $row['firstName'];
 $lastName = $row['lastName'];
 $password = $row['password'];

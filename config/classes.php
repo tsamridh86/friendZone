@@ -42,7 +42,7 @@ class Users{
 
 	}
 
-	public function getProfile($userName)
+	public function getProfileByUserName($userName)
 	{
 		$sql = "SELECT * FROM users WHERE userName = '$userName'";
 		$result = $this->conn->query($sql);
@@ -195,7 +195,7 @@ class Users{
 		}
 
 	}
-	public function getProfile($userId)
+	public function getProfileByUserId($userId)
 	{
 		$query="SELECT firstName,lastName,userName,profilePhoto from users where userId='$userId'";
 		$result = $this->conn->query($query);
