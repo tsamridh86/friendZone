@@ -113,7 +113,7 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 
 				if($posts[$i]['img'] != NULL){
 					echo '<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">d=
 						<img src="'.$posts[$i]['img'].'" class="img-responsive photoHolder">
 					</div>
 				</div>';
@@ -131,9 +131,10 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 						</form>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
-						<form method="post" action="">
-							<input type="hidden" name="comment" value="postId">
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment <span class="badge">4</span></button>
+
+						<form method="post" action="post.php">
+							<input type="hidden" name="comment" value="'.$posts[$i]['postId'].'">
+							<button type="submit" name="commentButton" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
 						</form>
 					</div>
 				</div>
