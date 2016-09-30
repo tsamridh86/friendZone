@@ -69,8 +69,14 @@ class Users{
 	public function addPost($image, $description, $userName)
 	{
 		$date = date("Y-m-d");
-		$img = "../images/".$image;
-
+		if($image)
+		{
+			$img = "../images/".$image;
+		}
+		else
+		{
+			$img='';
+		}
 		$sql = "SELECT userId from users WHERE userName = '$userName'";
 		$result = $this->conn->query($sql);
 		$userR = $result->fetch_assoc();
@@ -148,7 +154,7 @@ class Users{
 			$result1 = $this->conn->query($query1);
 			if($result1)
 			{
-				$user2='';
+				$user2=$userId.'$';
 				while ($row=$result1->fetch_assoc()) {
 					$user2=$user2.$row['user2'];
 					$user2=$user2.'$';//delimeter between userIds
