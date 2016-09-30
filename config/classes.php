@@ -120,18 +120,11 @@ class Users{
 
 	}
 
-	public function addComment($postId, $userId, $description, $image)
+	public function addComment($postId, $userId, $description)
 	{
-		if($image)
-		{
-			$img = "../images/".$image;
-		}
-		else
-		{
-			$img='';
-		}
+		
 		$date = date("Y-m-d");
-		$sql = "INSERT INTO comments(postId, userId, description, img, createdOn) VALUES('postId', $userId', '$description', '$img', '$date')";
+		$sql = "INSERT INTO comments(postId, userId, description, createdOn) VALUES('$postId', '$userId', '$description', '$date')";
 		$result = $this->conn->query($sql);
 
 		if (!$result)
@@ -228,5 +221,31 @@ class Users{
 		$postDetails['userName']=$userDetais['userName'];
 		$postDetails['profilePhoto']=$userDetais['profilePhoto'];
 		return $postDetails;
+	}
+	public function getCommentsByPostId($postId)
+	{
+		$query="SELECT userId,description,createdOn from comments WHERE postId='$postId'";
+		$result = $this->conn->query($query);
+		$i=0;
+		if($result){
+			$comments=array("index"=>array(
+									 "userId"=>'',
+									"description"=>'',
+									"createdOn"=>'',
+									"userName"=>'',
+									"profilePhoto"=>''));
+			while ($row = $result->fetch_assoc()) {
+				$comments[$i]['userId']=$row['userId'];
+				$comments[$i]['description']=$row['description'];
+				$comments[$i]['createdOn']=$row['createdOn'];
+				$profile = $this->getProfileByUserId($comments[$i]['userId']);
+				$comments[$i]['userName']=$profile['userName'];
+				$comments[$i]['profilePhoto']=$profile['profilePhoto'];
+				$i=$i+1;
+			}
+			return $comments;
+		}
+		else
+			return false;
 	}
 }
