@@ -74,14 +74,9 @@ class Users{
 		}
 		else
 		{
-<<<<<<< HEAD
 			$img='';
 		}
-=======
-			$img = NULL;
-		}
 
->>>>>>> 35771aa62d41951f4ca975d35eac7db54f483824
 		$sql = "SELECT userId from users WHERE userName = '$userName'";
 		$result = $this->conn->query($sql);
 		$userR = $result->fetch_assoc();
