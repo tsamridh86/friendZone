@@ -75,7 +75,7 @@ $postId=$_POST['comment'];
 						<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 							<form method="post" action="">
 								<input type="hidden" name="like" value="postId">
-								<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like <span class="badge">4</span></button>
+								<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like <span class="badge"><?php echo $user->getNoOfLikes($postId);?></span></button>
 							</form>
 						</div>
 					</div>
