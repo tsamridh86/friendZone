@@ -74,14 +74,9 @@ class Users{
 		}
 		else
 		{
-<<<<<<< HEAD
 			$img='';
 		}
-=======
-			$img = NULL;
-		}
 
->>>>>>> 35771aa62d41951f4ca975d35eac7db54f483824
 		$sql = "SELECT userId from users WHERE userName = '$userName'";
 		$result = $this->conn->query($sql);
 		$userR = $result->fetch_assoc();
@@ -127,7 +122,14 @@ class Users{
 
 	public function addComment($postId, $userId, $description, $image)
 	{
-		$img = "images/".$image;
+		if($image)
+		{
+			$img = "../images/".$image;
+		}
+		else
+		{
+			$img='';
+		}
 		$date = date("Y-m-d");
 		$sql = "INSERT INTO comments(postId, userId, description, img, createdOn) VALUES('postId', $userId', '$description', '$img', '$date')";
 		$result = $this->conn->query($sql);
@@ -166,7 +168,7 @@ class Users{
 					$user2=$user2.'$';//delimeter between userIds
 				}
 				$user2Id=explode('$',$user2);//converted into array
-				$query2="SELECT userId,description,img,createdOn from post WHERE userId='$user2Id[0]'";
+				$query2="SELECT postId,userId,description,img,createdOn from post WHERE userId='$user2Id[0]'";
 				if(count($user2Id)>1)//check if only one user then
 				{
 					$i=1;
@@ -182,13 +184,15 @@ class Users{
 								 "userId"=>'',
 								"description"=>'',
 								"img"=>'',
-								"createdOn"=>''));
+								"createdOn"=>'',
+								"postId"=>''));
 					$i=0;
 					while ($row=$result2->fetch_assoc()) {
 						$posts[$i]['userId']=$row['userId'];
 						$posts[$i]['description'] = $row['description'];
 						$posts[$i]['img'] = $row['img'];
 						$posts[$i]['createdOn']=$row['createdOn'];
+						$posts[$i]['postId']=$row['postId'];
 						$i=$i+1;
 					}
 					return $posts;
@@ -213,5 +217,16 @@ class Users{
 		$result = $this->conn->query($query);
 		$profile=$result->fetch_assoc();
 		return $profile;
+	}
+	public function getUserAndPostByPostId($postId)
+	{
+		$query="SELECT userId,description,img,createdOn from post WHERE postId='$postId'";
+		$result = $this->conn->query($query);
+		$postDetails=$result->fetch_assoc();
+		$userId=$postDetails["userId"];
+		$userDetais=$this->getProfileByUserId($userId);
+		$postDetails['userName']=$userDetais['userName'];
+		$postDetails['profilePhoto']=$userDetais['profilePhoto'];
+		return $postDetails;
 	}
 }
