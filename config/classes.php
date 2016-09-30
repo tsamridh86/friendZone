@@ -140,7 +140,14 @@ class Users{
 			return true;
 	}
 
-	
+	public function getNoOfLikes($postId)
+	{
+		$sql = "SELECT COUNT(userId) AS noOfLikes from likes where postId = ".$postId;
+		$result = $this->conn->query($sql);
+		$result = $result->fetch_assoc();
+		$result=$result['noOfLikes'];
+		return $result;
+	}
 
 
 	public function logout()

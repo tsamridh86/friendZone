@@ -113,7 +113,7 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 
 				if($posts[$i]['img'] != NULL){
 					echo '<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">d=
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<img src="'.$posts[$i]['img'].'" class="img-responsive photoHolder">
 					</div>
 				</div>';
@@ -127,7 +127,7 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 						<form method="post" action="">
 							<input type="hidden" name="like" value="postId">
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like <span class="badge">4</span></button>
+							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like <span class="badge">'.$user->getNoOfLikes($posts[$i]['postId']).'</span></button>
 						</form>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
@@ -234,6 +234,7 @@ else if($posts == "Follow Someone")
 			</div>
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
 				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+				<p> firstName lastName</p>
 			</div>
 		</div>
 		<!-- Can be deleted tag to tag only -->
@@ -243,6 +244,7 @@ else if($posts == "Follow Someone")
 			</div>
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
 				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+				<p> firstName lastName</p>
 			</div>
 		</div>
 		<!-- Can be deleted tag to tag only -->
@@ -252,6 +254,7 @@ else if($posts == "Follow Someone")
 			</div>
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
 				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+				<p> firstName lastName</p>
 			</div>
 		</div>
 	</div>
