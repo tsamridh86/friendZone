@@ -17,9 +17,27 @@ $userName = $_SESSION["userName"];
 $user = new Users($conn);
 
 $row = $user->getProfileByUserName($userName);
+$userId = $row['userId'];
 $firstName = $row['firstName'];
 $lastName = $row['lastName'];
 $image = $row['profilePhoto'];
+
+if(isset($_POST['like']))
+{
+	$postId = $_POST['like'];
+	$like = $user->likes($userId, $postId);
+
+	if(!$like)
+	{
+		echo "<script type='text/javascript'>alert('Could not like the post');</script>";
+	}
+	else
+	{
+		
+		echo "<script type='text/javascript'>window.location.href = 'index.php#".$postId."';</script>";
+	}
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -34,6 +52,7 @@ $image = $row['profilePhoto'];
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/home.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	
 </head>
 <body>
 <nav class="navbar navbar-fixed-top coloring" >
@@ -95,7 +114,7 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 		
 		$profile = $user->getProfileByUserId($posts[$i]['userId']);
 		echo ' 
-			<div class="row repeat">
+			<div  id = "'.$posts[$i]['postId'].'" class="row repeat">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 				<div class="row">
 					<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
@@ -126,8 +145,19 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 						<form method="post" action="">
-							<input type="hidden" name="like" value="postId">
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like</button>
+							<input type="hidden" name="like" value="'.$posts[$i]['postId'].'">';
+							$likeFlag = $user->isLiked($userId, $posts[$i]['postId']);
+
+							
+								echo '<button type="submit" class="btn btn-default"><span id = "spanIdLike" class="glyphicon glyphicon-thumbs-';if(!$likeFlag){echo "up";}else{echo "down";} echo '" aria-hidden="true"></span>'; 
+								if(!$likeFlag)
+									echo "Like";
+								else
+									echo "Unlike";
+								echo '</button>
+							
+							
+							
 						</form>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
@@ -155,89 +185,8 @@ else if($posts == "Follow Someone")
 ?>
 		<!-- <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button> -->
 
-<<<<<<< HEAD
-=======
-	<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content"> 
-		<div class="row repeat"><!-- This the div that should be inside the loop when printing all posts-->
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-			<div class="row">
-				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
-				<!--This is the user photo-->
-				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive photoHolder">
-				</div>
-				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-					<p><span class="postHead">@userName</span> posted: 
-						<button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button>
-					</p>  	
-					<p class="timeDisplay"> On, 16th Dec 1991 </p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<img src="../images/postTest.jpg" class="img-responsive photoHolder">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<p> Description of the post. This post could be arbitarily long so I am writing something random here to test it outside lol.</p> 
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<form method="post" action="">
-						<input type="hidden" name="like" value="postId">
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like <span class="badge">4</span></button>
-					</form>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
-					<form method="post" action="">
-						<input type="hidden" name="comment" value="postId">
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
-					</form>
-				</div>
-			</div>
-			</div>
-		</div>
-		<div class="row repeat"><!--Delete this after making backend, this should come inside a loop-->
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				
-			<div class="row">
-				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
-				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive photoHolder">
-				</div>
-				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-					<p><span class="postHead">@userName</span> posted: </p>  	
-					<p class="timeDisplay"> On, 16th Dec 1991 </p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<img src="../images/testImage.jpg" class="img-responsive photoHolder">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<p> This div needs to be created with for loop. This is made to show that the image auto-aligns itself in the middle & i specially made a unlike button if some users want to unlike what they did.</p> 
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<form method="post" action="">
-						<input type="hidden" name="like" value="postId">
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button>
-					</form>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
-					<form method="post" action="">
-						<input type="hidden" name="comment" value="postId">
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
-					</form>
-				</div>
-			</div>
-			</div>
-		</div>
-	</div>
->>>>>>> 35771aa62d41951f4ca975d35eac7db54f483824
+
+	
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 		<div class="profile">
 	<div class="row">

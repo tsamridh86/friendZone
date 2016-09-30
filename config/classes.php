@@ -67,27 +67,21 @@ class Users{
 
 	public function addPost($image, $description, $userName)
 	{
-		$date = date("Y-m-d");
 		if($image)
 		{
 			$img = "../images/".$image;
 		}
 		else
 		{
-<<<<<<< HEAD
 			$img='';
 		}
-=======
-			$img = NULL;
-		}
 
->>>>>>> 35771aa62d41951f4ca975d35eac7db54f483824
 		$sql = "SELECT userId from users WHERE userName = '$userName'";
 		$result = $this->conn->query($sql);
 		$userR = $result->fetch_assoc();
 		$userId = $userR['userId'];
 
-		$sql1 = "INSERT INTO post(userId, description, img, createdOn) VALUES('$userId', '$description', '$img', '$date')";
+		$sql1 = "INSERT INTO post(userId, description, img) VALUES('$userId', '$description', '$img')";
 		$result = $this->conn->query($sql1);
 
 		if (!$result)
@@ -98,10 +92,11 @@ class Users{
 
 	public function likes($userId, $postId)
 	{
-		$sql = "SELECT * FROM likes WHERE postId = '$postId' AND userId = '$userId'";
-		$result = $this->conn->query($sql);
 
-		if($result->num_rows == 0)
+
+		$result = $this->isLiked($userId, $postId);
+
+		if(!$result)
 		{
 			$sql = "INSERT INTO likes VALUES ('$postId', '$userId')";
 			$result = $this->conn->query($sql);
@@ -123,6 +118,17 @@ class Users{
 		}
 		
 
+	}
+
+	public function isLiked($userId, $postId)
+	{
+		$sql = "SELECT * FROM likes WHERE postId = '$postId' AND userId = '$userId'";
+		$result = $this->conn->query($sql);
+
+		if($result->num_rows == 0)
+			return false;
+		else
+			return true;
 	}
 
 	public function addComment($postId, $userId, $description, $image)
@@ -166,7 +172,7 @@ class Users{
 					$user2=$user2.'$';//delimeter between userIds
 				}
 				$user2Id=explode('$',$user2);//converted into array
-				$query2="SELECT userId,description,img,createdOn from post WHERE userId='$user2Id[0]'";
+				$query2="SELECT postId,userId,description,img,createdOn from post WHERE userId='$user2Id[0]'";
 				if(count($user2Id)>1)//check if only one user then
 				{
 					$i=1;
@@ -182,13 +188,15 @@ class Users{
 								 "userId"=>'',
 								"description"=>'',
 								"img"=>'',
-								"createdOn"=>''));
+								"createdOn"=>'',
+								"postId"=>''));
 					$i=0;
 					while ($row=$result2->fetch_assoc()) {
 						$posts[$i]['userId']=$row['userId'];
 						$posts[$i]['description'] = $row['description'];
 						$posts[$i]['img'] = $row['img'];
 						$posts[$i]['createdOn']=$row['createdOn'];
+						$posts[$i]['postId']=$row['postId'];
 						$i=$i+1;
 					}
 					return $posts;
