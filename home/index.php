@@ -44,7 +44,7 @@ $image = $row['profilePhoto'];
 	<div class="container-fluid collapse navbar-collapse" id="openNav">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
-			<li><a><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
+			<li><a data-toggle="modal" data-target="#followingWindow"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
 		</ul>
 		<form class="navbar-form navbar-left" method="get" action="search.php">
 			<input type="text" class="form-control" placeholder="Search for...">
@@ -181,7 +181,7 @@ else if($posts == "Follow Someone")
 				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 					<form method="post" action="">
 						<input type="hidden" name="like" value="postId">
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like</button>
+						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like <span class="badge">4</span></button>
 					</form>
 				</div>
 				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
@@ -295,7 +295,45 @@ else if($posts == "Follow Someone")
 	</div>
 	</div>
 </div>
-
+<div class="modal fade" id="followingWindow">
+	<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">x</button>
+		<h3> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> People you are following :</h3>
+	</div>
+	<div class="modal-body">
+		<!-- This tag needs to be repeated in loop, while posting users. -->
+		<div class="row followingUser">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<img src="../images/Wallpaper.jpg" class="image-responsive circle">
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+			</div>
+		</div>
+		<!-- Can be deleted tag to tag only -->
+		<div class="row followingUser">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<img src="../images/Wallpaper.jpg" class="image-responsive circle">
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+			</div>
+		</div>
+		<!-- Can be deleted tag to tag only -->
+		<div class="row followingUser">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<img src="../images/Wallpaper.jpg" class="image-responsive circle">
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+</div>
 </body>
 </html>
 

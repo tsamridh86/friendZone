@@ -100,3 +100,11 @@ nav .active {
 	max-height: 100px;
 	margin: auto;
 }
+
+.followingUser{
+	margin-bottom: 5px;
+}
+.followingUser img
+{
+	max-height: 80px;
+}
