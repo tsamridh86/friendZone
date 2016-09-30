@@ -54,8 +54,7 @@ class Users{
 
 	public function editProfile($firstName, $lastName, $userName, $password, $image)
 	{
-		$img = "../images/".$image;
-		$sql = "UPDATE users SET firstName = '$firstName', lastName = '$lastName', password = '$password', profilePhoto = '$img' WHERE userName = '$userName'";
+		$sql = "UPDATE users SET firstName = '$firstName', lastName = '$lastName', password = '$password', profilePhoto = '$image' WHERE userName = '$userName'";
 		$result = $this->conn->query($sql);
 		
 		if(!$result)
@@ -75,8 +74,14 @@ class Users{
 		}
 		else
 		{
+<<<<<<< HEAD
 			$img='';
 		}
+=======
+			$img = NULL;
+		}
+
+>>>>>>> 35771aa62d41951f4ca975d35eac7db54f483824
 		$sql = "SELECT userId from users WHERE userName = '$userName'";
 		$result = $this->conn->query($sql);
 		$userR = $result->fetch_assoc();
@@ -142,6 +147,7 @@ class Users{
 		session_destroy();
 		echo "<script type='text/javascript'>alert('Succesfully Logout');window.location.href = '../index.php';</script>";
 	}
+	
 	public function getPosts($userName)
 	{
 		$sql = "SELECT userId from users WHERE userName = '$userName'";

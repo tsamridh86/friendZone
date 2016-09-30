@@ -115,16 +115,25 @@ if(isset($_POST["firstName"]))
 	if(empty($password1))
 		$password1 = $password;
 
-	$file="../images/".$_FILES["profilePhoto"]["name"];
-	$temp_name = $_FILES['profilePhoto']['tmp_name'];
-	move_uploaded_file($temp_name, $file);
-	$img_name = addslashes($_FILES['profilePhoto']['name']);
+	if(!is_uploaded_file($_FILES["profilePhoto"]["tmp_name"]))
+	{
+		$img_name = $image;
+	}
+	else
+	{
+		$file="../images/".$_FILES["profilePhoto"]["name"];
+		$temp_name = $_FILES['profilePhoto']['tmp_name'];
+		move_uploaded_file($temp_name, $file);
+		$img_name = addslashes($_FILES['profilePhoto']['name']);
+		$img_name = "../images/".$img_name;
+	}
+
 
 	$profile = $user->editProfile($firstName, $lastName, $userName, $password1, $img_name);
 
 	if($profile === true)
 	{
-		echo "<script type='text/javascript'>alert('Profile Updated.');window.location.href = 'editProfile.php';</script>";
+		echo "<script type='text/javascript'>alert('Profile Updated.');window.location.href = 'index.php';</script>";
 	}
 	else
 	{

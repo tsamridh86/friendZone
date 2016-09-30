@@ -44,7 +44,7 @@ $image = $row['profilePhoto'];
 	<div class="container-fluid collapse navbar-collapse" id="openNav">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
-			<li><a><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
+			<li><a data-toggle="modal" data-target="#followingWindow"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
 		</ul>
 		<form class="navbar-form navbar-left" method="get" action="search.php">
 			<input type="text" class="form-control" placeholder="Search for...">
@@ -155,6 +155,89 @@ else if($posts == "Follow Someone")
 ?>
 		<!-- <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button> -->
 
+<<<<<<< HEAD
+=======
+	<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content"> 
+		<div class="row repeat"><!-- This the div that should be inside the loop when printing all posts-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+			<div class="row">
+				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
+				<!--This is the user photo-->
+				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive photoHolder">
+				</div>
+				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
+					<p><span class="postHead">@userName</span> posted: 
+						<button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button>
+					</p>  	
+					<p class="timeDisplay"> On, 16th Dec 1991 </p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<img src="../images/postTest.jpg" class="img-responsive photoHolder">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<p> Description of the post. This post could be arbitarily long so I am writing something random here to test it outside lol.</p> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+					<form method="post" action="">
+						<input type="hidden" name="like" value="postId">
+						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like <span class="badge">4</span></button>
+					</form>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
+					<form method="post" action="">
+						<input type="hidden" name="comment" value="postId">
+						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
+					</form>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="row repeat"><!--Delete this after making backend, this should come inside a loop-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				
+			<div class="row">
+				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
+				<img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive photoHolder">
+				</div>
+				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
+					<p><span class="postHead">@userName</span> posted: </p>  	
+					<p class="timeDisplay"> On, 16th Dec 1991 </p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<img src="../images/testImage.jpg" class="img-responsive photoHolder">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<p> This div needs to be created with for loop. This is made to show that the image auto-aligns itself in the middle & i specially made a unlike button if some users want to unlike what they did.</p> 
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+					<form method="post" action="">
+						<input type="hidden" name="like" value="postId">
+						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button>
+					</form>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
+					<form method="post" action="">
+						<input type="hidden" name="comment" value="postId">
+						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
+					</form>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+>>>>>>> 35771aa62d41951f4ca975d35eac7db54f483824
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 		<div class="profile">
 	<div class="row">
@@ -218,7 +301,45 @@ else if($posts == "Follow Someone")
 	</div>
 	</div>
 </div>
-
+<div class="modal fade" id="followingWindow">
+	<div class="modal-dialog">
+	<div class="modal-content">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">x</button>
+		<h3> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> People you are following :</h3>
+	</div>
+	<div class="modal-body">
+		<!-- This tag needs to be repeated in loop, while posting users. -->
+		<div class="row followingUser">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<img src="../images/Wallpaper.jpg" class="image-responsive circle">
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+			</div>
+		</div>
+		<!-- Can be deleted tag to tag only -->
+		<div class="row followingUser">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<img src="../images/Wallpaper.jpg" class="image-responsive circle">
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+			</div>
+		</div>
+		<!-- Can be deleted tag to tag only -->
+		<div class="row followingUser">
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+				<img src="../images/Wallpaper.jpg" class="image-responsive circle">
+			</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+</div>
 </body>
 </html>
 
