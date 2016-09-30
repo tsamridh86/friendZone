@@ -104,7 +104,7 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 					echo '<img src="'.$profile["profilePhoto"].'"  width = "80" class="img-responsive circle photoHolder">
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-						<p><span class="postHead">'.$profile["userName"].'</span> posted: 
+						<p><span class="postHead"> @'.$profile["userName"].'</span> posted: 
 							<button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button>
 						</p>  	
 						<p class="timeDisplay">On, '.$posts[$i]["createdOn"].'</p>
