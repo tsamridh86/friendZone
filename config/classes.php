@@ -67,7 +67,6 @@ class Users{
 
 	public function addPost($image, $description, $userName)
 	{
-		$date = date("Y-m-d");
 		if($image)
 		{
 			$img = "../images/".$image;
@@ -82,7 +81,7 @@ class Users{
 		$userR = $result->fetch_assoc();
 		$userId = $userR['userId'];
 
-		$sql1 = "INSERT INTO post(userId, description, img, createdOn) VALUES('$userId', '$description', '$img', '$date')";
+		$sql1 = "INSERT INTO post(userId, description, img) VALUES('$userId', '$description', '$img')";
 		$result = $this->conn->query($sql1);
 
 		if (!$result)
@@ -93,10 +92,11 @@ class Users{
 
 	public function likes($userId, $postId)
 	{
-		$sql = "SELECT * FROM likes WHERE postId = '$postId' AND userId = '$userId'";
-		$result = $this->conn->query($sql);
 
-		if($result->num_rows == 0)
+
+		$result = $this->isLiked($userId, $postId);
+
+		if(!$result)
 		{
 			$sql = "INSERT INTO likes VALUES ('$postId', '$userId')";
 			$result = $this->conn->query($sql);
@@ -118,6 +118,18 @@ class Users{
 		}
 		
 
+	}
+
+	
+	public function isLiked($userId, $postId)
+	{
+		$sql = "SELECT * FROM likes WHERE postId = '$postId' AND userId = '$userId'";
+		$result = $this->conn->query($sql);
+
+		if($result->num_rows == 0)
+			return false;
+		else
+			return true;
 	}
 
 	public function addComment($postId, $userId, $description)

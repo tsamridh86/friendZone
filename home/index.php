@@ -17,9 +17,27 @@ $userName = $_SESSION["userName"];
 $user = new Users($conn);
 
 $row = $user->getProfileByUserName($userName);
+$userId = $row['userId'];
 $firstName = $row['firstName'];
 $lastName = $row['lastName'];
 $image = $row['profilePhoto'];
+
+if(isset($_POST['like']))
+{
+	$postId = $_POST['like'];
+	$like = $user->likes($userId, $postId);
+
+	if(!$like)
+	{
+		echo "<script type='text/javascript'>alert('Could not like the post');</script>";
+	}
+	else
+	{
+		
+		echo "<script type='text/javascript'>window.location.href = 'index.php#".$postId."';</script>";
+	}
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -34,6 +52,7 @@ $image = $row['profilePhoto'];
 	<script src="../js/bootstrap.min.js"></script>
 	<script src="../js/home.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/home.css">
+	
 </head>
 <body>
 <nav class="navbar navbar-fixed-top coloring" >
@@ -95,7 +114,7 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 		
 		$profile = $user->getProfileByUserId($posts[$i]['userId']);
 		echo ' 
-			<div class="row repeat">
+			<div  id = "'.$posts[$i]['postId'].'" class="row repeat">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 				<div class="row">
 					<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
@@ -126,8 +145,22 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 						<form method="post" action="">
+
 							<input type="hidden" name="like" value="postId">
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like <span class="badge">'.$user->getNoOfLikes($posts[$i]['postId']).'</span></button>
+
+							<input type="hidden" name="like" value="'.$posts[$i]['postId'].'">';
+							$likeFlag = $user->isLiked($userId, $posts[$i]['postId']);
+
+							
+								echo '<button type="submit" class="btn btn-default"><span id = "spanIdLike" class="glyphicon glyphicon-thumbs-';if(!$likeFlag){echo "up";}else{echo "down";} echo '" aria-hidden="true"></span>'; 
+								if(!$likeFlag)
+									echo "Like <span class=\"badge\">".$user->getNoOfLikes($posts[$i]['postId'])."</span>";
+								else
+									echo "Unlike <span class=\"badge\">".$user->getNoOfLikes($posts[$i]['postId'])."</span>";
+								echo '</button>
+							
+							
+							
 						</form>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
@@ -155,6 +188,7 @@ else if($posts == "Follow Someone")
 }
 ?>
 		<!-- <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button> -->
+
 
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 		<div class="profile">
