@@ -127,13 +127,13 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 						<form method="post" action="">
 							<input type="hidden" name="like" value="postId">
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like</button>
+							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like <span class="badge">4</span></button>
 						</form>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
 						<form method="post" action="">
 							<input type="hidden" name="comment" value="postId">
-							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
+							<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment <span class="badge">4</span></button>
 						</form>
 					</div>
 				</div>
