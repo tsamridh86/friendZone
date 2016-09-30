@@ -135,8 +135,7 @@ class Users{
 	public function addComment($postId, $userId, $description)
 	{
 		
-		$date = date("Y-m-d");
-		$sql = "INSERT INTO comments(postId, userId, description, createdOn) VALUES('$postId', '$userId', '$description', '$date')";
+		$sql = "INSERT INTO comments(postId, userId, description) VALUES('$postId', '$userId', '$description')";
 		$result = $this->conn->query($sql);
 
 		if (!$result)
