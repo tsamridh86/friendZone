@@ -2,20 +2,43 @@
 require_once '../config/connect.php';
 require_once '../config/classes.php';
 session_start();
-if(!isset($_SESSION["userName"]) || !isset($_POST['commentButton']))
+$user = new Users($conn);
+if(!isset($_SESSION["userName"]) )
 {
 	header('Location:../index.php');
 }
 if(isset($_GET['logout']))
 {
-$user = new Users($conn);
 $user->logout();
+}
+
+if(isset($_POST['description']))
+{
+	
+	$row=$user->getProfileByUserName($_SESSION['userName']);
+	$description=$_POST['description'];
+	$Iscomment=$user->addComment($_SESSION['postId'],$row['userId'],$description);
+	if($Iscomment === true)
+	{
+		 header('Location:post.php');
+		
+
+	}
+	else{
+		echo "<script type='text/javascript'>alert('Sorry Something went wrong');window.location.href = 'post.php';</script>";
+		
+	}
+}
+if(isset($_SESSION['postId'])){
+	$postDetails=$user->getUserAndPostByPostId($_SESSION['postId']);
+	$postId=$_SESSION['postId'];
 }
 if(isset($_POST['commentButton']) && isset($_POST['comment']))
 {
-$user = new Users($conn);
 $postId=$_POST['comment'];
-	$postDetails=$user->getUserAndPostByPostId($postId);
+
+$_SESSION['postId']=$postId;
+$postDetails=$user->getUserAndPostByPostId($postId);
 }
 ?>
 <!DOCTYPE html>
@@ -82,37 +105,55 @@ $postId=$_POST['comment'];
 				</div>
 			</div>
 			<!-- This is the div that needs to be put in loop for the commenter -->
+<?php
+			$user = new Users($conn);
+			$comments=$user->getCommentsByPostId($postId);
+			if($comments != false){
+			$i=0;
+				while ($i < count($comments)-1) {
+					if($comments[$i]['profilePhoto'])
+					{
+					echo '<div class="row">
+						<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+							<img  class="img-responsive circle limitHeight" src="'.$comments[$i]['profilePhoto'].'">
+						</div>';
+					}
+					echo 	'<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 well">
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<p><span class="postHead">@'.$comments[$i]['userName'].'</span> posted: '.$comments[$i]['description'].'</p>
+									<p class="timeDisplay"> On, '.$comments[$i]['createdOn'].'</p>
+								</div>
+							</div>
+						</div>
+					</div>';
+					$i=$i+1;
+				}
+		}
+
+			?>
+			
+			<!-- This div should show up at the last because this is the last comment made -->
 			<div class="row">
 				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-					<img  class="img-responsive circle limitHeight" src="../images/1080x1920-HD-wallpapers-samsung-htc-android-smartphone-3040q7mm7-1080P.jpg">
+					<img  class="img-responsive circle limitHeight" src="<?php $row=$user->getProfileByUserName($_SESSION['userName']); echo $row['profilePhoto']; ?>">
 				</div>
 				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 well">
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<p><span class="postHead">@userName</span> posted: Lol this pic sux</p>
-							<p class="timeDisplay"> On, 16th Dec 1991 </p>
+								<form method="post" action="post.php">
+								<textarea class="form-control" placeholder="Write a comment..." name="description"></textarea>
+								<button type="submit" class="btn btn-default gap" name="land"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
+						</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		<!-- This div should show up at the last because this is the last comment made -->
-		<div class="row">
-			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-				<!-- THe current user photo should be here -->
-				<img  class="img-responsive circle limitHeight" src="../images/1080x1920-HD-wallpapers-samsung-htc-android-smartphone-3040q7mm7-1080P.jpg">
-			</div>
-			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 well">
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<form method="post" action="">
-							<textarea class="form-control" placeholder="Write a comment..."></textarea>
-							<button type="button" class="btn btn-default gap"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
-						</form>
-						<p class="timeDisplay"> On, 16th Dec 1991 </p>
-					</div>
-				</div>
-			</div>
-		</div>
+		
+
 	</div>
 </body>
 </html>
+
+
