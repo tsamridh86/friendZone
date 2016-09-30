@@ -69,7 +69,7 @@ $image = $row['profilePhoto'];
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder center">
 			<p class="bold"><?php echo "@".$userName; ?></p>
 			<p><?php echo $firstName."  ".$lastName; ?></p>
 			<form method="post" action="editProfile.php">
