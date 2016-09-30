@@ -12,9 +12,9 @@ nav{
 }
 
 .textHolder {
-	text-align: center;
 	font-size: 18px;
 	padding-bottom: 10px;
+	padding-top: 10px;
 }
 
 .circle{
@@ -101,10 +101,28 @@ nav .active {
 	margin: auto;
 }
 
+.limitHeight-300{
+	max-height: 300px;
+	margin: auto;	
+}
+
 .followingUser{
 	margin-bottom: 5px;
 }
 .followingUser img
 {
 	max-height: 80px;
+}
+
+.gap{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.commentContainer {
+	margin-top: 70px;
+}
+
+.likeHolder{
+	margin-bottom: 15px;
 }
