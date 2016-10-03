@@ -12,6 +12,23 @@ if(isset($_GET['logout']))
 $user->logout();
 }
 
+if(isset($_POST['like']) && isset($_POST['uid']))
+{
+	$postId = $_POST['like'];
+	$userId = $_POST['uid'];
+	$like = $user->likes($userId, $postId);
+
+	if(!$like)
+	{
+		echo "<script type='text/javascript'>alert('Could not like the post');</script>";
+	}
+	else
+	{
+		header('refresh:0; location:post.php');		
+	}
+
+}
+
 if(isset($_POST['description']))
 {
 	
@@ -34,9 +51,9 @@ if(isset($_SESSION['postId'])){
 	$postId=$_SESSION['postId'];
 }
 if(isset($_POST['commentButton']) && isset($_POST['comment']))
-{
-$postId=$_POST['comment'];
+{	
 
+$postId=$_POST['comment'];
 $_SESSION['postId']=$postId;
 $postDetails=$user->getUserAndPostByPostId($postId);
 }
@@ -97,8 +114,21 @@ $postDetails=$user->getUserAndPostByPostId($postId);
 					<div class="row likeHolder">
 						<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 							<form method="post" action="">
-								<input type="hidden" name="like" value="postId">
-								<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Like <span class="badge"><?php echo $user->getNoOfLikes($postId);?></span></button>
+								<input type="hidden" name="like" value="<?php echo $postId; ?>">
+								<?php
+								$row=$user->getProfileByUserName($_SESSION['userName']);
+								$uId = $row['userId'];
+								$likeFlag = $user->isLiked($uId, $postId);
+								echo '<input type="hidden" name="uid" value="'.$uId.'">';
+							
+								echo '<button type="submit" class="btn btn-default"><span id = "spanIdLike" class="glyphicon glyphicon-thumbs-';if(!$likeFlag){echo "up";}else{echo "down";} echo '" aria-hidden="true"></span>'; 
+								if(!$likeFlag)
+									echo "Like <span class=\"badge\">".$user->getNoOfLikes($postId)."</span>";
+								else
+									echo "Unlike <span class=\"badge\">".$user->getNoOfLikes($postId)."</span>";
+								echo '</button>';
+								?>
+								
 							</form>
 						</div>
 					</div>

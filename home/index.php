@@ -146,8 +146,7 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 						<form method="post" action="">
 
-							<input type="hidden" name="like" value="postId">
-
+							
 							<input type="hidden" name="like" value="'.$posts[$i]['postId'].'">';
 							$likeFlag = $user->isLiked($userId, $posts[$i]['postId']);
 
