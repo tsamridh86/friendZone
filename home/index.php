@@ -259,36 +259,38 @@ else if($posts == "Follow Someone")
 		<h3> <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> People you are following :</h3>
 	</div>
 	<div class="modal-body">
+
+		<?php
+			$following = $user->getFollowing($_SESSION['userName']);
+			$i = 0;
+			if($following != "You are not following anyone" && $following != "Something went wrong")
+			{
+				while($i < count($following)-1)
+				{
+					$fId = $following[$i]['userId'];
+					$fuserName = $following[$i]['userName'];
+					$ffirstName = $following[$i]['firstName'];
+					$flastName = $following[$i]['lastName'];
+					$fprofilePhoto = $following[$i]['profilePhoto'];
+
+		?>
 		<!-- This tag needs to be repeated in loop, while posting users. -->
+
 		<div class="row followingUser">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<img src="../images/Wallpaper.jpg" class="image-responsive circle">
+				<img src="<?php echo $fprofilePhoto; ?>" class="image-responsive circle">
 			</div>
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
-				<p> firstName lastName</p>
+				<p><span class="postHead"> @<?php echo $fuserName; ?></span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+				<p> <?php echo $ffirstName; ?> <?php echo $flastName; ?></p>
 			</div>
 		</div>
-		<!-- Can be deleted tag to tag only -->
-		<div class="row followingUser">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<img src="../images/Wallpaper.jpg" class="image-responsive circle">
-			</div>
-			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
-				<p> firstName lastName</p>
-			</div>
-		</div>
-		<!-- Can be deleted tag to tag only -->
-		<div class="row followingUser">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-				<img src="../images/Wallpaper.jpg" class="image-responsive circle">
-			</div>
-			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-				<p><span class="postHead"> @userName</span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
-				<p> firstName lastName</p>
-			</div>
-		</div>
+		<?php
+				$i = $i+1;
+				}
+			}
+		?>
+		
 	</div>
 	</div>
 	</div>
