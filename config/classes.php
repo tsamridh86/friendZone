@@ -274,4 +274,31 @@ class Users{
 		else
 			return false;
 	}
+	public function searchUsers($search)
+	{
+		$query="SELECT userId,userName,firstName,lastName,profilePhoto from users WHERE userName LIKE '%$search%' OR firstName LIKE '%$search%' OR lastName LIKE '%search%'";
+		$result = $this->conn->query($query);
+		if($result){
+			$searchedUsersList=array("index"=>array(
+								 "userId"=>'',
+								"userName"=>'',
+								"firstName"=>'',
+								"lastName"=>'',
+								"profilePhoto"=>''));
+			$i=0;
+			while ($row =$result->fetch_assoc()) {
+				$searchedUsersList[$i]['userId']=$row['userId'];
+				$searchedUsersList[$i]['userName']=$row['userName'];
+				$searchedUsersList[$i]['firstName']=$row['firstName'];
+				$searchedUsersList[$i]['lastName']=$row['lastName'];
+				$searchedUsersList[$i]['profilePhoto']=$row['profilePhoto'];
+				$i=$i+1;
+			}
+			return $searchedUsersList;
+		}
+		else{
+			return "Something went wrong";
+		}
+	}
+
 }
