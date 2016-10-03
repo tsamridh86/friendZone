@@ -136,3 +136,10 @@ nav .active {
 .center{
 	text-align: center;
 }
+
+
+.follow{
+	width: 60px;
+	margin:auto;
+	display: block;
+}
