@@ -302,7 +302,10 @@ class Users{
 		}
 	}
 
-
+	public function getTrending()
+	{
+		
+	}
 
 	public function getFollowing($userName)
 	{
