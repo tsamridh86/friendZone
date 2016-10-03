@@ -153,6 +153,14 @@ class Users{
 		return $result;
 	}
 
+	public function getNoOfComments($postId)
+	{
+		$sql = "SELECT COUNT(userId) AS noOfComments FROM  comments WHERE postId = ".$postId;
+		$result = $this->conn->query($sql);
+		$result = $result->fetch_assoc();
+		$result = $result['noOfComments'];
+		return $result;
+	}
 
 	public function logout()
 	{

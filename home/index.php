@@ -124,7 +124,6 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
 						<p><span class="postHead"> @'.$profile["userName"].'</span> posted: 
-							<button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button>
 						</p>  	
 						<p class="timeDisplay">On, '.$posts[$i]["createdOn"].'</p>
 					</div>
@@ -167,7 +166,7 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 
 						<form method="post" action="post.php">
 							<input type="hidden" name="comment" value="'.$posts[$i]['postId'].'">
-							<button type="submit" name="commentButton" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
+							<button type="submit" name="commentButton" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment <span class = "badge" >'.$user->getNoOfComments($posts[$i]['postId']).'</span></button>
 						</form>
 					</div>
 				</div>
