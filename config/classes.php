@@ -277,9 +277,9 @@ class Users{
 
 	public function searchUsers($search)
 	{
-		$query="SELECT userId,userName,firstName,lastName,profilePhoto from users WHERE userName LIKE '%$search%' OR firstName LIKE '%$search%' OR lastName LIKE '%search%'";
+		$query="SELECT userId,userName,firstName,lastName,profilePhoto from users WHERE ((userName LIKE '%$search%') OR (firstName LIKE '%$search%') OR (lastName LIKE '%$search%'))";
 		$result = $this->conn->query($query);
-		if($result){
+		if($result->num_rows >=1){
 			$searchedUsersList=array("index"=>array(
 								 "userId"=>'',
 								"userName"=>'',
@@ -296,6 +296,10 @@ class Users{
 				$i=$i+1;
 			}
 			return $searchedUsersList;
+		}
+		else if($result->num_rows == 0)
+		{
+			return "No records found";
 		}
 		else{
 			return "Something went wrong";
