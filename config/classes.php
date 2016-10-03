@@ -274,4 +274,42 @@ class Users{
 		else
 			return false;
 	}
+
+
+	public function getFollowing($userName)
+	{
+		$user = $this->getProfileByUserName($userName);
+		$userId = $user['userId'];
+		$sql = "SELECT users.userId as userId, users.userName as userName, users.firstName as firstName, users.lastName as lastName, users.profilePhoto as profilePhoto FROM follows INNER JOIN users ON follows.user2 = users.userId where follows.user1 = ".$user['userId'];
+		$result = $this->conn->query($sql);
+		if(!$result)
+			return "Something went wrong";
+		else
+		{
+			if($result->num_rows == 0)
+				return "You are not following anyone";
+			else
+			{
+				$i = 0;
+				$following = array("index"=>array(
+												"userId"=>'',
+												"userName"=>'',
+												"firstName"=>'',
+												"lastName"=>'',
+												"profilePhoto"=>''));
+
+				while($row = $result->fetch_assoc())
+				{
+					$following[$i]['userId']=$row['userId'];
+					$following[$i]['userName']=$row['userName'];
+					$following[$i]['firstName']=$row['firstName'];
+					$following[$i]['lastName']=$row['lastName'];
+					$following[$i]['profilePhoto']=$row['profilePhoto'];
+					$i = $i+1;
+				}
+				return $following;
+				
+			}
+		}
+	}
 }
