@@ -65,9 +65,9 @@ if(isset($_POST['like']))
 			<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
 			<li><a data-toggle="modal" data-target="#followingWindow"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Following </a></li>
 		</ul>
-		<form class="navbar-form navbar-left" method="get" action="search.php">
-			<input type="text" class="form-control" placeholder="Search for...">
-          	<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+		<form class="navbar-form navbar-left" method="post" action="search.php">
+			<input type="text" class="form-control" name="search"placeholder="Search for...">
+          	<button type="submit" class="btn btn-default" name="searchButton"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
         </form>
 		<ul class="nav navbar-nav navbar-right">
 

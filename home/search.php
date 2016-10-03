@@ -1,3 +1,29 @@
+<?php
+require_once '../config/connect.php';
+require_once '../config/classes.php';
+session_start();
+if(!isset($_SESSION["userName"]))
+{
+	header('Location:../index.php');
+}
+if(isset($_GET['logout']))
+{
+$users = new Users($conn);
+$users->logout();
+}
+if(isset($_POST['searchButton']) && isset($_POST['search']))
+{
+	$searchQuery=$_POST['search'];
+	$user = new Users($conn);
+	$searchedUsersList=$user->searchUsers($searchQuery);
+	
+}
+else if(isset($_POST['searchButton']) || !isset($_POST['search']))
+{
+header('Location:index.php');
+}
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -20,9 +46,9 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
 					</ul>
-					<form class="navbar-form navbar-left" method="get" action="search.php">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					<form class="navbar-form navbar-left" method="post" action="search.php">
+						<input type="text" class="form-control" placeholder="Search for..." name="search">
+						<button type="submit" class="btn btn-default" name="searchButton"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="index.php?logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
@@ -35,54 +61,36 @@
 				</div>
 			</div>
 			<hr>
-			<div class="container">
-				
-				<div class="row">
-					<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 repeat">
-						<img src="../images/Wallpaper.jpg" class="photoHolder">
-						<p><a> @userName </a></p>
-						<p> firstName lastName </p>
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Follow</button>
-					</div>
-					<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 repeat">
-						<img src="../images/b1.jpg" class="photoHolder">
-						<p><a> @userName </a></p>
-						<p> firstName lastName </p>
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Follow</button>
-					</div>
-					<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 repeat">
-						<img src="../images/4.jpg" class="photoHolder">
-						<p><a> @userName </a></p>
-						<p> firstName lastName </p>
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button>
-					</div>
-					<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 repeat">
-						<img src="../images/default.png" class="photoHolder">
-						<p><a> @userName </a></p>
-						<p> firstName lastName </p>
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button>
-					</div>
-					<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 repeat">
-						<img src="../images/1080x1920-HD-wallpapers-samsung-htc-android-smartphone-3040q7mm7-1080P.jpg" class="photoHolder">
-						<p><a> @userName </a></p>
-						<p> firstName lastName </p>
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Follow</button>
-					</div>
-					<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 repeat">
-						<img src="../images/Wallpaper.jpg" class="photoHolder">
-						<p><a> @userName </a></p>
-						<p> firstName lastName </p>
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Follow</button>
-					</div>
-					<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 repeat">
-						<img src="../images/Wallpaper.jpg" class="photoHolder">
-						<p><a> @userName </a></p>
-						<p> firstName lastName </p>
-						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button>
-					</div>
-					
-				</div>
-			</div>
+			<?php if($searchedUsersList === "No records found"){
+					echo '<div class="alert alert-info">No records found</div>';
+				}
+				if($searchedUsersList === "Something went wrong"){
+					echo '<div class="alert alert-danger">Something went wrong</div>';
+					}
+				else{
+					$i=0;
+					echo '<div class="container"><div class="row">';
+						while ($i < count($searchedUsersList) - 1) {
+							
+						echo '
+							<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 repeat">
+								<img src="'.$searchedUsersList[$i]['profilePhoto'].'" class="photoHolder">
+								<p><a> @'.$searchedUsersList[$i]['userName'].' </a></p>
+								<p>'.$searchedUsersList[$i]['firstName'].' '.$searchedUsersList[$i]['lastName'].'</p>
+								<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Follow</button>
+							</div>';
+					$i=$i+1;
+				}
+				echo '		
+						</div>
+					</div>';
+			}?>
+<!-- 			<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 repeat">
+								<img src="../images/default.png" class="photoHolder">
+								<p><a> @userName </a></p>
+								<p> firstName lastName </p>
+								<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button>
+							</div> -->
 		</div>
 	</body>
 </html>
