@@ -308,7 +308,33 @@ class Users{
 
 	public function getTrending()
 	{
-		
+		// the very danger line written by Samridh Tuladhar to get the most trending posts
+		$sql = "select postId , description, userId , userName from post natural join users natural join (SELECT count(userId) as noOfLikes , postId from likes group by (postId)) x order by noOfLikes desc limit 6";
+		$result = $this->conn->query($sql);
+		if($result->num_rows >=1){
+			$searchedUsersList=array("index"=>array(
+								 "postId"=>'',
+								"description"=>'',
+								"userId"=>'',
+								"userName"=>''));
+			$i=0;
+			while($row = $result->fetch_assoc())
+			{
+				$mostTrending[$i]['postId'] = $row['postId'];
+				$mostTrending[$i]['description'] = $row['description'];
+				$mostTrending[$i]['userId'] = $row['userId'];
+				$mostTrending[$i]['userName'] = $row['userName'];
+				$i = $i + 1;
+			}
+			return $mostTrending;
+		}
+		else if($result->num_rows == 0)
+		{
+			return "No records found";
+		}
+		else{
+			return "Something went wrong";
+		}
 	}
 
 	public function getFollowing($userName)
