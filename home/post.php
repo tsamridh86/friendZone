@@ -81,7 +81,7 @@ $postDetails=$user->getUserAndPostByPostId($postId);
 					<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
 				</ul>
 				<form class="navbar-form navbar-left" method="get" action="search.php">
-					<input type="text" class="form-control" placeholder="Search for...">
+					<input type="text" class="form-control" name="q" placeholder="Search for...">
 					<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 				</form>
 				<ul class="nav navbar-nav navbar-right">

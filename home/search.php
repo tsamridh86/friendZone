@@ -11,14 +11,14 @@ if(isset($_GET['logout']))
 $users = new Users($conn);
 $users->logout();
 }
-if(isset($_POST['searchButton']) && isset($_POST['search']))
+if(isset($_GET['q']))
 {
-	$searchQuery=$_POST['search'];
+	$searchQuery=$_GET['q'];
 	$user = new Users($conn);
 	$searchedUsersList=$user->searchUsers($searchQuery);
 	
 }
-else if(isset($_POST['searchButton']) || !isset($_POST['search']))
+else if(!isset($_GET['q']))
 {
 header('Location:index.php');
 }
@@ -46,9 +46,9 @@ header('Location:index.php');
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
 					</ul>
-					<form class="navbar-form navbar-left" method="post" action="search.php">
-						<input type="text" class="form-control" placeholder="Search for..." name="search">
-						<button type="submit" class="btn btn-default" name="searchButton"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					<form class="navbar-form navbar-left" method="get" action="search.php">
+						<input type="text" class="form-control" placeholder="Search for..." name="q">
+						<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="index.php?logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out</a></li>
