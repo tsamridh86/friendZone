@@ -97,7 +97,7 @@ if(isset($_POST['user1']) && isset($_POST['user2']))
 						echo '
 							<div class="col-xs-4 col-sm-4 col-md-2 col-lg-2 repeat">
 								<img src="'.$searchedUsersList[$i]['profilePhoto'].'" class="photoHolder">
-								<p><a> @'.$searchedUsersList[$i]['userName'].' </a></p>
+								<p><a href="profile.php?profile='.$searchedUsersList[$i]['userName'].'"> @'.$searchedUsersList[$i]['userName'].' </a></p>
 								<p>'.$searchedUsersList[$i]['firstName'].' '.$searchedUsersList[$i]['lastName'].'</p>
 								<form method = "post" action = "">
 								<input type = "hidden" name = "user1" value = "'.$userId.'">

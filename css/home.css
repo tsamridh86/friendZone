@@ -147,3 +147,8 @@ nav .active {
 .postEditor{
 	margin-top : 60px;
 }
+
+.followingUser img {
+	display: block;
+	margin:auto;
+}

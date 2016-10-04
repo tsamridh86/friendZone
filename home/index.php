@@ -95,7 +95,7 @@ if(isset($_POST['user2']))
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder center">
-			<p class="bold"><?php echo "@".$userName; ?></p>
+			<p class="bold"><?php echo "<a href='profile.php?profile=".$userName."'>@".$userName."</a>"; ?></p>
 			<p><?php echo $firstName."  ".$lastName; ?></p>
 			<form method="post" action="editProfile.php">
 
@@ -129,7 +129,7 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 					echo '<img src="'.$profile["profilePhoto"].'"  width = "80" class="img-responsive circle photoHolder">
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-						<p><span class="postHead"> @'.$profile["userName"].'</span> posted: 
+						<p><span class="postHead"> <a href="profile.php?profile='.$profile["userName"].'">@'.$profile["userName"].'</a></span> posted: 
 						</p>  	
 						<p class="timeDisplay">On, '.$posts[$i]["createdOn"].'</p>
 					</div>
@@ -207,7 +207,7 @@ else if($posts == "Follow Someone")
 				?>
 		<div class="row trending">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<p><span class="postHead">@<?php echo $mostTrending[$u]['userName']; ?></span>  : <?php echo $mostTrending[$u]['description']; ?></p>
+				<p><span class="postHead"><a href="profile.php?profile=<?php echo $mostTrending[$u]['userName']; ?>">@<?php echo $mostTrending[$u]['userName']; ?></a></span>  : <?php echo $mostTrending[$u]['description']; ?></p>
 			</div>
 		</div>
 		<?php $u = $u + 1 ;} ?>
@@ -284,7 +284,7 @@ else if($posts == "Follow Someone")
 				<img src="<?php echo $fprofilePhoto; ?>" class="image-responsive circle">
 			</div>
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-				<p><span class="postHead"> @<?php echo $fuserName; ?></span>
+				<p><span class="postHead"><a href="profile.php?profile=<?php echo $fuserName; ?>">@<?php echo $fuserName; ?></a></span>
 				<form method = "post" action = "">
 				<input type = "hidden" name = "user2" value = "<?php echo $fId; ?>"/> 
 				<button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></form></p>
