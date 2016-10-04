@@ -348,6 +348,44 @@ class Users{
 		}
 	}
 
+	public function follow($user1, $user2)
+	{
+		$isFollowing = $this->isFollowing($user1, $user2);
+
+		if(!$isFollowing)
+		{
+			$sql = "INSERT INTO follows VALUES ('$user1', '$user2')";
+			$result = $this->conn->query($sql);
+			if(!$result)
+				return false;
+			else
+				return true;
+		}
+		else
+		{
+			$sql = "DELETE FROM follows WHERE user1 = '$user1' AND user2 = '$user2'";
+			$result = $this->conn->query($sql);
+			if(!$result)
+				return false;
+			else
+				return true;
+		}
+
+
+	}
+
+
+	public function isFollowing($user1, $user2)
+	{
+		$sql = "SELECT * FROM follows WHERE user1 = '$user1' AND user2 = '$user2'";
+		$result = $this->conn->query($sql);
+
+		if($result->num_rows == 0)
+			return false;
+		else
+			return true;
+	}
+
 
 	
 }
