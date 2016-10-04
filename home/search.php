@@ -22,6 +22,28 @@ else if(isset($_POST['searchButton']) || !isset($_POST['search']))
 {
 header('Location:index.php');
 }
+
+$user = new Users($conn);
+$userName = $_SESSION["userName"];
+$row = $user->getProfileByUserName($userName);
+$userId = $row['userId'];
+
+if(isset($_POST['user1']) && isset($_POST['user2']))
+{
+	$user1 = $_POST['user1'];
+	$user2 = $_POST['user2'];
+	$searchQuery = $_POST['searchB'];
+
+	$result = $user->follow($user1, $user2);
+	if(!$result)
+	{
+		echo "<script type='text/javascript'>alert('Could not follow.Try later.');</script>";
+	}
+	else
+	{
+		header('refresh:0; location:search.php?q='.$searchQuery);
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +99,15 @@ header('Location:index.php');
 								<img src="'.$searchedUsersList[$i]['profilePhoto'].'" class="photoHolder">
 								<p><a> @'.$searchedUsersList[$i]['userName'].' </a></p>
 								<p>'.$searchedUsersList[$i]['firstName'].' '.$searchedUsersList[$i]['lastName'].'</p>
-								<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Follow</button>
+								<form method = "post" action = "">
+								<input type = "hidden" name = "user1" value = "'.$userId.'">
+								<input type = "hidden" name = "searchB" value = "'.$searchQuery.'">
+								<input type = "hidden" name = "user2" value = "'.$searchedUsersList[$i]['userId'].'">';
+								$isFollowing = $user->isFollowing($userId, $searchedUsersList[$i]['userId']);
+
+
+								echo '<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-eye-'; if(!$isFollowing){echo 'open';}else{echo 'close';} echo '" aria-hidden="true"></span>'; if(!$isFollowing){echo 'Follow';}else{echo 'Unfollow';} echo '</button>
+								</form>
 							</div>';
 					$i=$i+1;
 				}

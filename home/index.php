@@ -28,15 +28,21 @@ if(isset($_POST['like']))
 	$like = $user->likes($userId, $postId);
 
 	if(!$like)
-	{
 		echo "<script type='text/javascript'>alert('Could not like the post');</script>";
-	}
 	else
-	{
-		
 		echo "<script type='text/javascript'>window.location.href = 'index.php#".$postId."';</script>";
-	}
 
+}
+
+if(isset($_POST['user2']))
+{
+	$user2 = $_POST['user2'];
+	$result = $user->follow($userId, $user2);
+
+	if(!$result)
+		echo "<script type='text/javascript'>alert('Could not like the post');</script>";
+	else
+		echo "<script type='text/javascript'>window.location.href = 'index.php';</script>";		
 }
 
 ?>
@@ -281,7 +287,10 @@ else if($posts == "Follow Someone")
 				<img src="<?php echo $fprofilePhoto; ?>" class="image-responsive circle">
 			</div>
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-				<p><span class="postHead"> @<?php echo $fuserName; ?></span> <button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></p>
+				<p><span class="postHead"> @<?php echo $fuserName; ?></span>
+				<form method = "post" action = "">
+				<input type = "hidden" name = "user2" value = "<?php echo $fId; ?>"/> 
+				<button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></form></p>
 				<p> <?php echo $ffirstName; ?> <?php echo $flastName; ?></p>
 			</div>
 		</div>

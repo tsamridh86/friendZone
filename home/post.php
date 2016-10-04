@@ -172,7 +172,7 @@ $postDetails=$user->getUserAndPostByPostId($postId);
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								<form method="post" action="post.php">
-								<textarea class="form-control" placeholder="Write a comment..." name="description"></textarea>
+								<textarea class="form-control" placeholder="Write a comment..." name="description" required></textarea>
 								<button type="submit" class="btn btn-default gap" name="land"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
 						</form>
 						</div>
