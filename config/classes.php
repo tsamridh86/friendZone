@@ -64,6 +64,16 @@ class Users{
 
 	}
 
+	public function editPost($image, $description, $postId)
+	{
+		$sql = "UPDATE post SET description = '$description', img = '$image' WHERE postId = '$postId'";
+		$result = $this->conn->query($sql);
+
+		if(!$result)
+			return false;
+		else
+			return true;
+	}
 
 	public function addPost($image, $description, $userName)
 	{

@@ -1,3 +1,34 @@
+<?php
+require_once '../config/connect.php';
+require_once '../config/classes.php';
+session_start();
+if(!isset($_SESSION["userName"]))
+{
+	header('Location:../index.php');
+}
+
+if(isset($_GET['logout']))
+{
+$users = new Users($conn);
+$users->logout();
+}
+
+$users = new Users($conn);
+
+
+
+if(isset($_GET['post']))
+{
+
+	$postId = $_GET['post'];
+	$post = $users->getUserAndPostByPostId($postId);
+
+	$image = $post['img'];
+	$description = $post['description'];
+	$userName = $post['userName'];
+
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -45,7 +76,19 @@
 						Current Photo :
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-						<img src="../images/wallpaper.jpg" class="img-responsive" width="350px">
+						<?php
+							if($image == "")
+								echo '<p>No image to display</p>';
+							else{
+						?>
+						<img src="<?php echo $image; ?>" class="img-responsive" width="350px">
+						<?php
+							}
+						?>
+						<input type = "hidden" name = "old" value = "<?php echo $image; ?>"/>
+						<input type = "hidden" name = "postId" value = "<?php echo $postId; ?>"/>
+						<input type = "hidden" name = "uName" value = "<?php echo $userName; ?>"/>
+
 					</div>
 				</div>
 				<div class="row">
@@ -61,7 +104,7 @@
 						Description :
 					</div>
 					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-						<textarea class="form-control" name="description" placeholder="Description"> The old post text should show up here</textarea>
+						<textarea class="form-control" name="description" placeholder="Description"><?php echo $description; ?> </textarea>
 					</div>
 				</div>
 				<div class="row">
@@ -73,3 +116,41 @@
 		</div>
 	</body>
 </html>
+<?php
+}
+
+
+if(isset($_POST['description']))
+{
+	$description = $_POST['description'];
+	$old = $_POST['old'];
+	$postId = $_POST['postId'];
+	$userName = $_POST['uName'];
+	if(!is_uploaded_file($_FILES["img"]["tmp_name"]))
+	{
+		$image = $old;
+	}
+	else
+	{
+		$file="../images/".$_FILES["img"]["name"];
+		$temp_name = $_FILES['img']['tmp_name'];
+		move_uploaded_file($temp_name, $file);
+		$image = addslashes($_FILES['img']['name']);
+		$image = "../images/".$image;
+	}
+
+	$post = $users->editPost($image, $description, $postId);
+
+	if($post === true)
+	{
+		echo "<script type='text/javascript'>alert('Post Updated.');window.location.href = 'profile.php?profile=".$userName."';</script>";
+	}
+	else
+	{
+		echo "<script type='text/javascript'>alert('Problem updating post.');window.location.href = 'editPost.php?post=".$postId."';</script>";
+	}
+
+}
+
+
+?>
