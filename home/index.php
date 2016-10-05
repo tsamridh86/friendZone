@@ -40,7 +40,7 @@ if(isset($_POST['user2']))
 	$result = $user->follow($userId, $user2);
 
 	if(!$result)
-		echo "<script type='text/javascript'>alert('Could not like the post');</script>";
+		echo "<script type='text/javascript'>alert('Could not follow the user');</script>";
 	else
 		echo "<script type='text/javascript'>window.location.href = 'index.php';</script>";		
 }
