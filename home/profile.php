@@ -73,7 +73,7 @@ if(!isset($_GET['profile']))
 						</div>
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder center">
-								<p class="bold">@<?php echo $userName;?></p>
+								<p class="bold"><a href="profile.php?profile=<?php echo $userName;?>">@<?php echo $userName;?></a></p>
 								<p><?php echo $firstName.' '.$lastName;?></p>
 							</div>
 						</div>
@@ -99,7 +99,7 @@ if(!isset($_GET['profile']))
 										<img src="'.$fprofilePhoto.'" class="image-responsive circle follow" >
 									</div>
 									<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-										<p><span class="postHead"> @'.$fuserName.'</span> </p>
+										<p><span class="postHead"><a href="profile.php?profile='.$fuserName.'"> @'.$fuserName.'</a></span> </p>
 										<p> '.$ffirstName.' '.$flastName.'</p>
 									</div>
 								</div>';
@@ -136,7 +136,7 @@ if($posts != "No posts found" && $posts != "No id found")
 					echo '<img src="'.$image.'"  width = "80" class="img-responsive circle photoHolder">
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-						<p><span class="postHead"> @'.$userName.'</span> posted: 
+						<p><span class="postHead"><a href="profille.php?profile='.$userName.'"> @'.$userName.'</a></span> posted: 
 						</p>';
 					if($_GET['profile'] == $_SESSION['userName'])
 						{
@@ -231,7 +231,7 @@ else if(strcmp($posts, "No posts found")  === 0)
 										<img src="'.$fprofilePhoto.'" class="image-responsive circle follow" >
 									</div>
 									<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-										<p><span class="postHead"> @'.$fuserName.'</span> </p>
+										<p><span class="postHead"><a href="profile.php?profile='.$fuserName.'"> @'.$fuserName.'</a></span> </p>
 										<p> '.$ffirstName.' '.$flastName.'</p>
 									</div>
 								</div>';
