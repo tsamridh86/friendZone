@@ -105,9 +105,10 @@ if(isset($_POST['user1']) && isset($_POST['user2']))
 								<input type = "hidden" name = "user2" value = "'.$searchedUsersList[$i]['userId'].'">';
 								$isFollowing = $user->isFollowing($userId, $searchedUsersList[$i]['userId']);
 
-
-								echo '<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-eye-'; if(!$isFollowing){echo 'open';}else{echo 'close';} echo '" aria-hidden="true"></span>'; if(!$isFollowing){echo 'Follow';}else{echo 'Unfollow';} echo '</button>
-								</form>
+								if($searchedUsersList[$i]['userName'] != $_SESSION['userName']){
+								echo '<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-eye-'; if(!$isFollowing){echo 'open';}else{echo 'close';} echo '" aria-hidden="true"></span>'; if(!$isFollowing){echo 'Follow';}else{echo 'Unfollow';} echo '</button>';
+							}
+								echo '</form>
 							</div>';
 					$i=$i+1;
 				}

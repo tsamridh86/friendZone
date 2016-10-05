@@ -434,7 +434,7 @@ class Users{
 		$userR = $result->fetch_assoc();
 		$userId = $userR['userId'];
 		if($userId){
-				$query1="SELECT postId,description,img,createdOn from post WHERE userId='$userId'";
+				$query1="SELECT postId,description,img,createdOn from post WHERE userId='$userId' ORDER BY createdOn DESC";
 				$result1=$this->conn->query($query1);
 				if($result1->num_rows >= 1)
 				{
