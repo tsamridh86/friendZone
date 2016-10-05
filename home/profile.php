@@ -1,8 +1,38 @@
-<!--This page is tailored for individual users -->
+<?php
+require_once '../config/connect.php';
+require_once '../config/classes.php';
+session_start();
+if(!isset($_SESSION["userName"]))
+{
+	header('Location:../index.php');
+}
+if(isset($_GET['logout']))
+{
+$users = new Users($conn);
+$users->logout();
+}
+if(isset($_GET['profile']))
+{
+	$user = new Users($conn);
+	$userName=$_GET['profile'];
+	$row = $user->getProfileByUserName($userName);
+$userId = $row['userId'];
+$firstName = $row['firstName'];
+$lastName = $row['lastName'];
+$image = $row['profilePhoto'];
+$posts=$user->getPostsForProfile($_GET['profile']);
+$following = $user->getFollowing($_GET['profile'],"following");
+$followers = $user->getFollowing($_GET['profile'],"followers");
+}
+if(!isset($_GET['profile']))
+{
+	header("Location:index.php");
+}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>@userName</title>
+		<title>@<?php echo $userName;?></title>
 		<!-- links to bootstrap & jQuery -->
 		<script src="../js/jquery-3.1.0.min.js"></script>
 		<link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -37,203 +67,189 @@
 					<div class="profile" id="profile">
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<span class="heading bold"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> firstName's profile</span>
-								<img src="../images/Wallpaper.jpg" class="img-responsive circle photoHolder" alt="Cinque Terre" height="100" width="100">
+								<span class="heading bold"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $firstName;?> profile</span>
+								<img src="<?php echo $image; ?>" class="img-responsive circle photoHolder" alt="Cinque Terre" height="100" width="100">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder center">
-								<p class="bold">@userName</p>
-								<p>firstName  lastName</p>
+								<p class="bold">@<?php echo $userName;?></p>
+								<p><?php echo $firstName.' '.$lastName;?></p>
 							</div>
 						</div>
 					</div>
-					<div class="profile" >
+					<?php
+					$i = 0;
+			
+					echo '<div class="profile" >
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<span class="heading bold"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span> @userName follows</span><br>
+								<span class="heading bold"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span> @'.$userName.' follows</span><br>';
+			if($following != "You are not following anyone" && $following != "Something went wrong")
+			{
+								while($i < count($following)-1){
+									$fuserName = $following[$i]['userName'];
+									$ffirstName = $following[$i]['firstName'];
+									$flastName = $following[$i]['lastName'];
+									$fprofilePhoto = $following[$i]['profilePhoto'];
+
+								echo '
 								<div class="row followingUser">
 									<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-										<img src="../images/Wallpaper.jpg" class="image-responsive circle follow" >
+										<img src="'.$fprofilePhoto.'" class="image-responsive circle follow" >
 									</div>
 									<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-										<p><span class="postHead"> @userName</span> </p>
-										<p> firstName lastName</p>
+										<p><span class="postHead"> @'.$fuserName.'</span> </p>
+										<p> '.$ffirstName.' '.$flastName.'</p>
 									</div>
-								</div>
-								<!-- can be deleted after backend -->
-								<div class="row followingUser">
-									<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-										<img src="../images/Wallpaper.jpg" class="image-responsive circle follow" >
-									</div>
-									<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-										<p><span class="postHead"> @userName</span> </p>
-										<p> firstName lastName</p>
-									</div>
-								</div>
-								<!-- can be deleted after backend -->
-								<div class="row followingUser">
-									<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-										<img src="../images/Wallpaper.jpg" class="image-responsive circle follow" >
-									</div>
-									<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-										<p><span class="postHead"> @userName</span> </p>
-										<p> firstName lastName</p>
-									</div>
-								</div>
-							</div>
-						</div></div>
+								</div>';
+								$i=$i+1;
+							}
+								
+						
+					}
+			else if($following == "You are not following anyone" && $following !="Something went wrong"){
+				echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-info">Not following anyone</div>';
+			}
+			else if($following != "You are not following anyone" && $following =="Something went wrong"){
+				echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-danger">Something went wrong</div>';
+			}
+
+	echo '	</div></div></div>';							
+	echo '</div>';				
+?>
+<?php
+$i=0;
+if($posts != "No posts found" && $posts != "No id found")
+{	
+	echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content">';
+	while ($i < count($posts)-1) {
+		
+		
+		echo ' 
+			<div  id = "'.$posts[$i]['postId'].'" class="row repeat">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+				<div class="row">
+					<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
+					<!--This is the user photo-->';
+
+					echo '<img src="'.$image.'"  width = "80" class="img-responsive circle photoHolder">
 					</div>
-					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content">
-						<div  id = "3" class="row repeat">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-								<div class="row">
-									<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
-										<!--This is the user photo--><img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive circle photoHolder">
-									</div>
-									<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-										<p><span class="postHead"> @tsamridh86</span> posted:
-										<button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button>
-									</p>
-									<p class="timeDisplay">On, 2016-10-01 00:38:55</p>
-								</div>
-							</div><div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<p> hello there, I am samridh tuladhar here</p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-								<form method="post" action="">
-									<input type="hidden" name="like" value="postId">
-									<input type="hidden" name="like" value="3"><button type="submit" class="btn btn-default"><span id = "spanIdLike" class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>Unlike <span class="badge">1</span></button>
-									
-									
-									
-								</form>
-							</div>
-							<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
-								<form method="post" action="post.php">
-									<input type="hidden" name="comment" value="3">
-									<button type="submit" name="commentButton" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
-								</form>
-							</div>
-						</div>
+					<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
+						<p><span class="postHead"> @'.$userName.'</span> posted: 
+						</p>';
+					if($_GET['profile'] == $_SESSION['userName'])
+						{
+							echo '<form class="navbar-form " method="get" action="editPost.php">
+							<input type="hidden" name="post" value="'.$posts[$i]['postId'].'"> 
+								<button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button></form>';
+						}  	
+						echo '<p class="timeDisplay">On, '.$posts[$i]["createdOn"].'</p>
 					</div>
-				</div>
-				
-				<div  id = "1" class="row repeat">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-						<div class="row">
-							<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
-								<!--This is the user photo--><img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive circle photoHolder">
-							</div>
-							<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-								<p><span class="postHead"> @tsamridh86</span> posted:
-								<button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button>
-							</p>
-							<p class="timeDisplay">On, 2016-09-30 00:00:00</p>
-						</div>
-					</div><div class="row">
+				</div>';
+
+				if($posts[$i]['img'] != NULL){
+					echo '<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<img src="../images/" class="img-responsive photoHolder">
+						<img src="'.$posts[$i]['img'].'" class="img-responsive photoHolder">
 					</div>
-				</div><div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<p> What came first? The chicken or the egg?
-					Ans : The one you ordered first.</p>
+				</div>';
+			}
+				echo '<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<p> '.$posts[$i]["description"].'</p> 
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+						<form method="post" action="">
+
+							
+							<input type="hidden" name="like" value="'.$posts[$i]['postId'].'">';
+							$likeFlag = $user->isLiked($userId, $posts[$i]['postId']);
+
+							
+								echo '<button type="submit" class="btn btn-default"><span id = "spanIdLike" class="glyphicon glyphicon-thumbs-';if(!$likeFlag){echo "up";}else{echo "down";} echo '" aria-hidden="true"></span>'; 
+								if(!$likeFlag)
+									echo "Like <span class=\"badge\">".$user->getNoOfLikes($posts[$i]['postId'])."</span>";
+								else
+									echo "Unlike <span class=\"badge\">".$user->getNoOfLikes($posts[$i]['postId'])."</span>";
+								echo '</button>
+							
+							
+							
+						</form>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
+
+						<form method="post" action="post.php">
+							<input type="hidden" name="comment" value="'.$posts[$i]['postId'].'">
+							<button type="submit" name="commentButton" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment <span class = "badge" >'.$user->getNoOfComments($posts[$i]['postId']).'</span></button>
+						</form>
+					</div>
+				</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-					<form method="post" action="">
-						<input type="hidden" name="like" value="postId">
-						<input type="hidden" name="like" value="1"><button type="submit" class="btn btn-default"><span id = "spanIdLike" class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>Unlike <span class="badge">3</span></button>
-						
-						
-						
-					</form>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
-					<form method="post" action="post.php">
-						<input type="hidden" name="comment" value="1">
-						<button type="submit" name="commentButton" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div  id = "2" class="row repeat">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-			<div class="row">
-				<div class="col-xs-5 col-sm-5 col-md-2 col-lg-2">
-					<!--This is the user photo--><img src="../images/Wallpaper.jpg"  width = "80" class="img-responsive circle photoHolder">
-				</div>
-				<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-					<p><span class="postHead"> @tsamridh86</span> posted:
-					<button type="button" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button>
-				</p>
-				<p class="timeDisplay">On, 2016-09-30 00:00:00</p>
-			</div>
-		</div><div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<p> My heart goes shalala in the morning</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-			<form method="post" action="">
-				<input type="hidden" name="like" value="postId">
-				<input type="hidden" name="like" value="2"><button type="submit" class="btn btn-default"><span id = "spanIdLike" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>Like <span class="badge">0</span></button>
-			</form>
-		</div>
-		<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 col-md-offset-1 col-lg-offset-1">
-			<form method="post" action="post.php">
-				<input type="hidden" name="comment" value="2">
-				<button type="submit" name="commentButton" class="btn btn-default"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comment</button>
-			</form>
-		</div>
-	</div>
-</div>
-</div>
-</div>		<!-- <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button> -->
+			';
+			$i = $i+1;
+	}
+echo '</div>';
+}
+else if($posts === "No id found" )
+{
+
+	echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-danger">Something is not right</div>';
+}
+else if(strcmp($posts, "No posts found")  === 0)
+{
+	echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-info">No posts found</div>';
+}
+
+?>
+
+							
+
+<!-- <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button> -->
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-<div class="profile">
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<span class="heading bold"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> @userName followed by </span><br>
-			<div class="row followingUser">
-				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-					<img src="../images/Wallpaper.jpg" class="image-responsive circle follow" >
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<p><span class="postHead"> @userName</span> </p>
-					<p> firstName lastName</p>
-				</div>
-			</div>
-			<!-- can be deleted after backend -->
-			<div class="row followingUser">
-				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-					<img src="../images/Wallpaper.jpg" class="image-responsive circle follow" >
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<p><span class="postHead"> @userName</span> </p>
-					<p> firstName lastName</p>
-				</div>
-			</div>
-			<!-- can be deleted after backend -->
-			<div class="row followingUser">
-				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-					<img src="../images/Wallpaper.jpg" class="image-responsive circle follow" >
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					<p><span class="postHead"> @userName</span> </p>
-					<p> firstName lastName</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<?php
+					echo '<div class="profile" >
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<span class="heading bold"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span> @'.$userName.' followed by</span><br>';
+			$i=0;
+			if($followers != "You are not following anyone" && $followers != "Something went wrong")
+			{
+								while($i < count($followers)-1){
+									$fuserName = $followers[$i]['userName'];
+									$ffirstName = $followers[$i]['firstName'];
+									$flastName = $followers[$i]['lastName'];
+									$fprofilePhoto = $followers[$i]['profilePhoto'];
+
+								echo '
+								<div class="row followingUser">
+									<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+										<img src="'.$fprofilePhoto.'" class="image-responsive circle follow" >
+									</div>
+									<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+										<p><span class="postHead"> @'.$fuserName.'</span> </p>
+										<p> '.$ffirstName.' '.$flastName.'</p>
+									</div>
+								</div>';
+								$i=$i+1;
+							}
+								
+						
+					}
+			else if($followers == "You are not following anyone" && $followers !="Something went wrong"){
+				echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-info">No any followers</div>';
+			}
+			else if($following != "You are not following anyone" && $followers =="Something went wrong"){
+				echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-danger">Something went wrong</div>';
+			}
+
+	echo '	</div></div></div>';							
+	echo '</div>';				
+?>
 </div>
 </div>
 </div>
