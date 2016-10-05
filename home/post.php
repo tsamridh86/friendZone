@@ -97,7 +97,7 @@ $postDetails=$user->getUserAndPostByPostId($postId);
 				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 					<div class="row">
 						<div class="col-xs-12 col-sm-10 col-md-3 col-lg-3">
-							<p><span class="postHead">@<?php echo $postDetails['userName'];?></span> posted: </p>
+							<p><span class="postHead"><a href="profile.php?profile=<?php echo $postDetails['userName'];?>">@<?php echo $postDetails['userName'];?></a></span> posted: </p>
 							<p class="timeDisplay"> On, <?php echo $postDetails['createdOn'];?> </p>
 						</div>
 					</div>
@@ -151,7 +151,7 @@ $postDetails=$user->getUserAndPostByPostId($postId);
 					echo 	'<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 well">
 							<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-									<p><span class="postHead">@'.$comments[$i]['userName'].'</span> posted: '.$comments[$i]['description'].'</p>
+									<p><span class="postHead"><a href="profile.php?profile='.$comments[$i]['userName'].'">@'.$comments[$i]['userName'].'</a></span> posted: '.$comments[$i]['description'].'</p>
 									<p class="timeDisplay"> On, '.$comments[$i]['createdOn'].'</p>
 								</div>
 							</div>
