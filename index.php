@@ -13,9 +13,21 @@ session_start();
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css"> 
 	<script src="js/bootstrap.min.js"></script>
-
 	<link rel="stylesheet" type="text/css" href="css/index.css">
-
+	<script type="text/javascript">
+		function checkPassword(){
+			var pas1 = document.getElementById("pswd").value;
+			var pas2 = document.getElementById("repswd").value;
+			if(pas1 != pas2) {
+				alert("Password do not match");
+				return false;
+			}
+			else{
+				document.getElementById('btn').value = "ready";
+				return true;
+			} 
+		}
+	</script>
 </head>
 <body>
 <nav class="navbar" >
@@ -54,7 +66,7 @@ session_start();
 		<h3> <span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Join Us! </h3>
 	</div>
 	<div class="modal-body">
-		<form action="" method="POST">
+		<form action="" method="POST" onsubmit="return checkPassword();">
 	<div class="row">
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 			<input type="text" name="firstName" class="form-control" required="required" placeholder="First Name">
@@ -70,12 +82,17 @@ session_start();
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<input type="password" name="password" class="form-control" required="required" placeholder="Password">
+			<input type="password" name="password" id="pswd" class="form-control" required="required" placeholder="Password">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<input type="password" id="repswd" class="form-control" required="required" placeholder="Retype Password">
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-			<button type="submit" class="btn btn-primary" name="signup">Sign Up</button>
+			<button type="submit" class="btn btn-primary" id="btn" name="signup">Sign Up</button>
 		</div>
 	</div>
 	</form>
@@ -87,7 +104,7 @@ session_start();
 </html>
 <?php
 $user = new Users($conn);
-if(isset($_POST['signup']))
+if(isset($_POST['signup']) && $_POST['signup'] == "ready")
 {
 $userName=$_POST["userName"];
 $firstName=$_POST["firstName"];
