@@ -17,6 +17,8 @@ class Users{
 			return true;
 	}
 
+
+
 	public function isSignup($firstName, $lastName,$userName,$password)
 	{
 		$query2 = "SELECT userName from users where userName = '$userName'";
@@ -322,7 +324,7 @@ class Users{
 		$sql = "select postId , description, userId , userName from post natural join users natural join (SELECT count(userId) as noOfLikes , postId from likes group by (postId)) x order by noOfLikes desc limit 6";
 		$result = $this->conn->query($sql);
 		if($result->num_rows >=1){
-			$searchedUsersList=array("index"=>array(
+			$mostTrending=array("index"=>array(
 								 "postId"=>'',
 								"description"=>'',
 								"userId"=>'',
@@ -337,6 +339,36 @@ class Users{
 				$i = $i + 1;
 			}
 			return $mostTrending;
+		}
+		else if($result->num_rows == 0)
+		{
+			return "No records found";
+		}
+		else{
+			return "Something went wrong";
+		}
+	}
+
+	public function getMostPopular()
+	{
+		$sql = "select userName, firstName , lastName, profilePhoto from users inner join (SELECT count(user2) as noOfFollowers , user1 from follows group by user1 order by noOfFollowers desc)x on users.userId = x.user1 order by noOfFollowers desc limit 6";
+		$result = $this->conn->query($sql);
+		if($result->num_rows >=1){
+			$mostPopular=array("index"=>array(
+								 "userName"=>'',
+								"firstName"=>'',
+								"lastName"=>'',
+								"profilePhoto"=>''));
+			$i=0;
+			while($row = $result->fetch_assoc())
+			{
+				$mostPopular[$i]['userName'] = $row['userName'];
+				$mostPopular[$i]['firstName'] = $row['firstName'];
+				$mostPopular[$i]['lastName'] = $row['lastName'];
+				$mostPopular[$i]['profilePhoto'] = $row['profilePhoto'];
+				$i = $i + 1;
+			}
+			return $mostPopular;
 		}
 		else if($result->num_rows == 0)
 		{

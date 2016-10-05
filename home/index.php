@@ -104,6 +104,32 @@ if(isset($_POST['user2']))
 		</div>
 	</div>
 	</div>
+	<div class="profile">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<span class="heading bold"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Most popular</span>
+			</div>
+			<?php 
+			$w = 0 ;
+			$mostPopular = $user->getMostPopular();
+			while($w < count($mostPopular)-1)
+			{
+			?>
+			<div class="row followingUser">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+					<img src="<?php echo $mostPopular[$w]['profilePhoto']; ?>" class="image-responsive circle follow" >
+				</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<p><span class="postHead"><a href="profile.php?profile=<?php echo $mostPopular[$w]['userName']; ?>"> @<?php echo $mostPopular[$w]['userName']; ?></a></span> </p>
+						<p><?php echo $mostPopular[$w]['firstName']." ".$mostPopular[$w]['lastName']; ?></p>
+					</div>
+									
+				</div>
+			<?php
+			$w = $w+1;
+			}?>
+		</div>
+	</div>
 	</div>
 
 
