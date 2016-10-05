@@ -291,13 +291,26 @@ else if($posts == "No id found" || $posts != "something went wrong" )
 				<button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></form></p>
 				
 				<p> <?php echo $ffirstName; ?> <?php echo $flastName; ?></p>
-			</div>
-		</div>
-		<?php
+				<?php
 				$i = $i+1;
-				}
+				}?>
+				</div>
+
+			<?php	
+			}
+			else if($following == "You are not following anyone")
+			{
+				echo '<p>You are not following anyone</p>';
+			}
+			else
+			{
+				echo '<p>Something went wrong</p>';
 			}
 		?>
+			
+
+		</div>
+		
 		
 	</div>
 	</div>
