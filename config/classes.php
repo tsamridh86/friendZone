@@ -189,7 +189,7 @@ class Users{
 		{
 			$query1="SELECT user2 from follows WHERE user1='$userId'";
 			$result1 = $this->conn->query($query1);
-			if($result1)
+			if($result1->num_rows > 0)
 			{
 				$user2=$userId.'$';
 				while ($row=$result1->fetch_assoc()) {
@@ -347,11 +347,17 @@ class Users{
 		}
 	}
 
-	public function getFollowing($userName)
+	public function getFollowing($userName,$requestType)
 	{
 		$user = $this->getProfileByUserName($userName);
 		$userId = $user['userId'];
-		$sql = "SELECT users.userId as userId, users.userName as userName, users.firstName as firstName, users.lastName as lastName, users.profilePhoto as profilePhoto FROM follows INNER JOIN users ON follows.user2 = users.userId where follows.user1 = ".$user['userId'];
+		if($requestType == "following"){
+			$sql = "SELECT users.userId as userId, users.userName as userName, users.firstName as firstName, users.lastName as lastName, users.profilePhoto as profilePhoto FROM follows INNER JOIN users ON follows.user2 = users.userId where follows.user1 = ".$user['userId'];
+		}
+		if($requestType == "followers")
+		{
+			$sql = "SELECT users.userId as userId, users.userName as userName, users.firstName as firstName, users.lastName as lastName, users.profilePhoto as profilePhoto FROM follows INNER JOIN users ON follows.user1 = users.userId where follows.user2 = ".$user['userId'];	
+		}
 		$result = $this->conn->query($sql);
 		if(!$result)
 			return "Something went wrong";
@@ -421,7 +427,38 @@ class Users{
 		else
 			return true;
 	}
-
-
+	public function getPostsForProfile($userName)
+	{
+		$sql = "SELECT userId from users WHERE userName = '$userName'";
+		$result = $this->conn->query($sql);
+		$userR = $result->fetch_assoc();
+		$userId = $userR['userId'];
+		if($userId){
+				$query1="SELECT postId,description,img,createdOn from post WHERE userId='$userId'";
+				$result1=$this->conn->query($query1);
+				if($result1->num_rows >= 1)
+				{
+					$i = 0;
+				$posts = array("index"=>array(  "postId"=>'',
+ 												"description"=>'',
+												"img"=>'',
+												"createdOn"=>''));
+				while ($row=$result1->fetch_assoc()) {
+						$posts[$i]["postId"]=$row["postId"];
+						$posts[$i]["description"]=$row["description"];
+						$posts[$i]["img"]=$row["img"];
+						$posts[$i]["createdOn"]=$row["createdOn"];
+						$i=$i+1;
+					}
+					return $posts;
+				}
+				else{
+					return "No posts found";
+				}
+		}
+		else{
+			return "No id found";
+		}
+	}
 	
 }

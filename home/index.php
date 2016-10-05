@@ -28,21 +28,15 @@ if(isset($_POST['like']))
 	$like = $user->likes($userId, $postId);
 
 	if(!$like)
+	{
 		echo "<script type='text/javascript'>alert('Could not like the post');</script>";
+	}
 	else
+	{
+		
 		echo "<script type='text/javascript'>window.location.href = 'index.php#".$postId."';</script>";
+	}
 
-}
-
-if(isset($_POST['user2']))
-{
-	$user2 = $_POST['user2'];
-	$result = $user->follow($userId, $user2);
-
-	if(!$result)
-		echo "<script type='text/javascript'>alert('Could not like the post');</script>";
-	else
-		echo "<script type='text/javascript'>window.location.href = 'index.php';</script>";		
 }
 
 ?>
@@ -182,14 +176,16 @@ if($posts != "something went wrong" && $posts != "Follow Someone" && $posts != "
 	}
 echo '</div>';
 }
+
+else if(strcmp($posts, "Follow Someone")  === 0)
+{
+	echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-info">No posts found Follow Someone</div>';
+}
 else if($posts == "No id found" || $posts != "something went wrong" )
 {
-	echo '<div class="alert alert-danger">Something is not right</div>';
+	echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-danger">Something is not right</div>';
 }
-else if($posts == "Follow Someone")
-{
-	echo '<div class="alert alert-info">Follow Someone</div>';
-}
+
 ?>
 		<!-- <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Unlike</button> -->
 
@@ -264,7 +260,7 @@ else if($posts == "Follow Someone")
 	<div class="modal-body">
 
 		<?php
-			$following = $user->getFollowing($_SESSION['userName']);
+			$following = $user->getFollowing($_SESSION['userName'],"following");
 			$i = 0;
 			if($following != "You are not following anyone" && $following != "Something went wrong")
 			{
@@ -288,6 +284,7 @@ else if($posts == "Follow Someone")
 				<form method = "post" action = "">
 				<input type = "hidden" name = "user2" value = "<?php echo $fId; ?>"/> 
 				<button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></form></p>
+				
 				<p> <?php echo $ffirstName; ?> <?php echo $flastName; ?></p>
 			</div>
 		</div>

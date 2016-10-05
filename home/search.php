@@ -18,7 +18,7 @@ if(isset($_GET['q']))
 	$searchedUsersList=$user->searchUsers($searchQuery);
 	
 }
-else if(!isset($_GET['q']))
+else if($_GET['q'] == NULL)
 {
 header('Location:index.php');
 }
