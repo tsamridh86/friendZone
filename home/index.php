@@ -229,7 +229,7 @@ else if($posts == "No id found" || $posts != "something went wrong" )
 				<?php
 					$mostTrending = $user->getTrending();
 					$u = 0;
-					while($u < count($mostTrending) )
+					while($u < count($mostTrending)-1 )
 					{
 				?>
 		<div class="row trending">
