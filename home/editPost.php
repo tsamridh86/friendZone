@@ -40,6 +40,27 @@ if(isset($_GET['post']))
 		<script src="../js/home.js"></script>
 		<link rel="stylesheet" type="text/css" href="../css/home.css">
 		<link rel="stylesheet" type="text/css" href="../css/editProfile.css">
+			<script type="text/javascript">
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        // function createImageTag(input){
+        // 	var elem = document.createElement("img");
+        // 	document.getElementById("para").appendChild("elem");
+        // 	elem.setAttribute("width", "350px");
+        // 	console.log("inside createElement");
+        // 	readURL(input);
+
+
+        // }
+    </script>
 
 	</head>
 	<body>
@@ -78,10 +99,10 @@ if(isset($_GET['post']))
 					<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
 						<?php
 							if($image == "")
-								echo '<p>No image to display</p>';
+								echo '<p id="para" onchange="createImageTag(this);">No image to display</p>';
 							else{
 						?>
-						<img src="<?php echo $image; ?>" class="img-responsive" width="350px">
+						<img id="preview" src="<?php echo $image; ?>" class="img-responsive" width="350px">
 						<?php
 							}
 						?>
@@ -96,7 +117,7 @@ if(isset($_GET['post']))
 						New Photo :
 					</div>
 					<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-					<input type="file" name="img" class="form-control" placeholder="Profile Photo">	
+					<input type="file" name="img" class="form-control" placeholder="Profile Photo" onchange="readURL(this);">
 					</div>
 				</div>
 				<div class="row">

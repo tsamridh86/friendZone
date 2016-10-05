@@ -33,6 +33,18 @@ $image = $row['profilePhoto'];
 	<link rel="stylesheet" href="../css/bootstrap-theme.min.css"> 
 	<script src="../js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/editProfile.css">
+	<script type="text/javascript">
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 
 </head>
 <body>
@@ -81,7 +93,8 @@ $image = $row['profilePhoto'];
 			Current Profile Photo :
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<img src="<?php echo $image; ?>" class="img-responsive" width="100">
+			<img id="preview" src="<?php echo $image; ?>" class="img-responsive" width="100">
+
 		</div>
 	</div>
 	<div class="row">
@@ -89,7 +102,7 @@ $image = $row['profilePhoto'];
 			Profile Photo : 
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-			<input type="file" name="profilePhoto" class="form-control" placeholder="Profile Photo">
+			<input type="file" name="profilePhoto" class="form-control" placeholder="Profile Photo" onchange="readURL(this);">
 		</div>
 	</div>
 	<div class="row">
