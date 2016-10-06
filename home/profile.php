@@ -73,7 +73,13 @@ if(!isset($_GET['profile']))
 		<script src="../js/bootstrap.min.js"></script>
 		<script src="../js/home.js"></script>
 		<link rel="stylesheet" type="text/css" href="../css/home.css">
-		
+		<script>
+// 		var el = document.getElementById('deletePostForm');
+
+// el.addEventListener('submit', function(){
+//     return confirm('Are you sure you want to submit this form?');
+// }, false);
+		</script>
 	</head>
 	<body>
 		<nav class="navbar navbar-fixed-top coloring" >
@@ -199,6 +205,10 @@ if($posts != "No posts found" && $posts != "No id found")
 							echo '<form class="navbar-form " method="get" action="editPost.php">
 							<input type="hidden" name="post" value="'.$posts[$i]['postId'].'"> 
 								<button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-scissors" aria-hidden="true"></span> Edit</button></form>';
+							echo '<form class="navbar-form " id="deletePostForm" method="get" action="editPost.php" onsubmit="return confirm(\'Are you really want to delete the post?\');">
+							<input type="hidden" name="deletePostId" value="'.$posts[$i]['postId'].'"> 
+								<button type="submit"  class="btn btn-default pull-right"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>Delete</button></form>';
+
 						}  	
 						echo '<p class="timeDisplay">On, '.$posts[$i]["createdOn"].'</p>
 					</div>

@@ -349,7 +349,7 @@ if(isset($_POST['submit']))
 {
 
 	
-	$description = $_POST["description"];
+	$description =htmlspecialchars($_POST["description"],ENT_QUOTES);
 
 	$file="../images/".$_FILES["image"]["name"];
 	$temp_name = $_FILES['image']['tmp_name'];

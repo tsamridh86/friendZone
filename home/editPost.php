@@ -15,7 +15,17 @@ $users->logout();
 
 $users = new Users($conn);
 
-
+if(isset($_GET['deletePostId']))
+{
+	$deletePost=$users->deletePost($_GET['deletePostId']);
+	if($deletePost === true)
+	{
+		echo "<script type='text/javascript'>alert('Succesfully deleted Post');window.location.href = 'profile.php?profile=".$_SESSION['userName']."';</script>";
+	}
+	else{
+		echo "<script type='text/javascript'>alert('Sorry Something went wrong');window.location.href = 'profile.php?profile=".$_SESSION['userName']."';</script>";
+	}
+}
 
 if(isset($_GET['post']))
 {
