@@ -11,6 +11,38 @@ if(isset($_GET['logout']))
 $users = new Users($conn);
 $users->logout();
 }
+if(isset($_GET['user1']) && isset($_GET['user2']))
+{
+	$user = new Users($conn);
+	$user1 = $_GET['user1'];
+	$user2 = $_GET['user2'];
+	$uName = $_GET['profile'];
+	$result = $user->follow($user1, $user2);
+	if(!$result)
+	{
+		echo "<script type='text/javascript'>alert('Could not follow.Try later.');</script>";
+	}
+	else
+	{
+		header('refresh:0; location:profile.php?profile='.$uName);
+	}
+
+}
+
+if(isset($_POST['like']))
+{
+	$user = new Users($conn);
+	$postId = $_POST['like'];
+	$uName = $_POST['profile'];
+	$like = $user->likes($userId, $postId);
+
+	if(!$like)
+		echo "<script type='text/javascript'>alert('Could not like the post');</script>";
+	else
+		header('refresh:0; location:profile.php?profile='.$uName);
+
+}
+
 if(isset($_GET['profile']))
 {
 	$user = new Users($conn);
@@ -75,6 +107,29 @@ if(!isset($_GET['profile']))
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 textHolder center">
 								<p class="bold"><a href="profile.php?profile=<?php echo $userName;?>">@<?php echo $userName;?></a></p>
 								<p><?php echo $firstName.' '.$lastName;?></p>
+								<?php
+									if($userName == $_SESSION['userName'])
+									{
+								?>
+								<form method="post" action="editProfile.php">
+								<input type="hidden" name="userName" value="userName"> 
+								<button type="submit" class="btn btn-default">Edit Profile</button>
+								</form>
+								<?php
+									}
+									else
+									{
+										$result = $user->getProfileByUserName($_SESSION['userName']);
+										$uId = $result['userId'];	
+										echo '<form method = "get" action = "">';
+										echo '<input type = "hidden" name = "profile" value = "'.$userName.'">';
+										echo '<input type = "hidden" name = "user1" value = "'.$uId.'">';
+										echo '<input type = "hidden" name = "user2" value = "'.$userId.'">';
+										$isFollowing = $user->isFollowing($uId, $userId);
+										echo '<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-eye-'; if(!$isFollowing){echo 'open';}else{echo 'close';} echo '" aria-hidden="true"></span>'; if(!$isFollowing){echo 'Follow';}else{echo 'Unfollow';} echo '</button></form>';
+
+									}
+								?>
 							</div>
 						</div>
 					</div>
@@ -164,7 +219,7 @@ if($posts != "No posts found" && $posts != "No id found")
 					<div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
 						<form method="post" action="">
 
-							
+							<input type = "hidden" name = "profile" value = "'.$userName.'">
 							<input type="hidden" name="like" value="'.$posts[$i]['postId'].'">';
 							$likeFlag = $user->isLiked($userId, $posts[$i]['postId']);
 
