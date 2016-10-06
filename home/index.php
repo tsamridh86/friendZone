@@ -315,13 +315,11 @@ else if($posts == "No id found" || $posts != "something went wrong" )
 				<form method = "post" action = "">
 				<input type = "hidden" name = "user2" value = "<?php echo $fId; ?>"/> 
 				<button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Unfollow</button></form></p>
-				
-				<p> <?php echo $ffirstName; ?> <?php echo $flastName; ?></p>
+				<p> <?php echo $ffirstName; ?> <?php echo $flastName; ?></p></div></div>
 				<?php
 				$i = $i+1;
 				}?>
-				</div>
-
+				
 			<?php	
 			}
 			else if($following == "You are not following anyone")
