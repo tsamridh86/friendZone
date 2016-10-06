@@ -372,7 +372,7 @@ class Users{
 
 	public function getMostPopular()
 	{
-		$sql = "select userName, firstName , lastName, profilePhoto from users inner join (SELECT count(user2) as noOfFollowers , user1 from follows group by user1 order by noOfFollowers desc)x on users.userId = x.user1 order by noOfFollowers desc limit 6";
+		$sql = "select userName, firstName , lastName, profilePhoto from users inner join (SELECT count(user1) as noOfFollowers , user2 from follows group by user2 order by noOfFollowers desc)x on users.userId = x.user2 order by noOfFollowers desc limit 6";
 		$result = $this->conn->query($sql);
 		if($result->num_rows >=1){
 			$mostPopular=array("index"=>array(
@@ -518,3 +518,29 @@ class Users{
 	
 	
 }
+
+
+
+function numberOfDigits ($num)
+{
+    if($num == 1) return 1;
+    else return ceil(log10($num));
+    
+}    
+
+
+function nameOfFile($fileName, $extension = '', $directory = '' )
+	{
+		$i = 0;
+		$len = strlen($extension);
+		while(file_exists($directory.$fileName))
+		{
+			if(!$i) 
+			$fileName = substr($fileName,0,-$len).$i.substr($fileName, -$len);
+			else 	 
+				$fileName= substr($fileName,0,-(numberOfDigits($i)+$len)).$i.substr($fileName, -$len);
+			$i++;
+		}
+
+		return $directory.$fileName;
+		}

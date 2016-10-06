@@ -134,11 +134,10 @@ if(isset($_POST["firstName"]))
 	}
 	else
 	{
-		$file="../images/".$_FILES["profilePhoto"]["name"];
+		$img_name=$_FILES["profilePhoto"]["name"];
+		$img_name = nameOfFile($img_name,substr($img_name,-4),"../images/");
 		$temp_name = $_FILES['profilePhoto']['tmp_name'];
-		move_uploaded_file($temp_name, $file);
-		$img_name = addslashes($_FILES['profilePhoto']['name']);
-		$img_name = "../images/".$img_name;
+		move_uploaded_file($temp_name, $img_name);
 	}
 
 
