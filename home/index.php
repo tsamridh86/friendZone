@@ -349,7 +349,7 @@ if(isset($_POST['submit']))
 {
 
 	
-	$description = $_POST["description"];
+	$description =htmlspecialchars($_POST["description"],ENT_QUOTES);
 
 	$img_name=$_FILES["image"]["name"];
 	$img_name = nameOfFile($img_name,substr($img_name,-4),"../images/");

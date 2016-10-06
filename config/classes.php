@@ -233,27 +233,6 @@ class Users{
 				}
 			}
 			else{
-				$sql = "SELECT postId,userId,description,img,createdOn from post WHERE userId = ".$userId;
-				$res = $this->conn->query($sql);
-				if($res->num_rows > 0)
-					{
-					$posts=array("index"=>array(
-								 "userId"=>'',
-								"description"=>'',
-								"img"=>'',
-								"createdOn"=>'',
-								"postId"=>''));
-					$i=0;
-					while ($row=$res->fetch_assoc()) {
-						$posts[$i]['userId']=$row['userId'];
-						$posts[$i]['description'] = $row['description'];
-						$posts[$i]['img'] = $row['img'];
-						$posts[$i]['createdOn']=$row['createdOn'];
-						$posts[$i]['postId']=$row['postId'];
-						$i=$i+1;
-					}
-					return $posts;
-				}
 				return "Follow Someone";
 			}
 
@@ -513,8 +492,31 @@ class Users{
 			return "No id found";
 		}
 	}
+	public function deletePost($postId){
+		$query1="SELECT img FROM post WHERE postId='$postId'";
+		$result1=$this->conn->query($query1);
+		if($result1->num_rows>0)
+		{
+			$row=$result1->fetch_assoc();
+			if($row['img']!=''){
+			unlink($row['img']);
+		}
+		
+		$query="DELETE FROM post WHERE postId='$postId'";
+		$result=$this->conn->query($query);
+		if($result)
+		{
 
-
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+		else{
+			return false;
+		}
+	}
 	
 	
 }
@@ -544,3 +546,5 @@ function nameOfFile($fileName, $extension = '', $directory = '' )
 
 		return $directory.$fileName;
 		}
+
+
