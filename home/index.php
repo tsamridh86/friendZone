@@ -210,7 +210,7 @@ echo '</div>';
 
 else if(strcmp($posts, "Follow Someone")  === 0)
 {
-	echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-info">No posts found Follow Someone</div>';
+	echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-info">No posts yet!</div>';
 }
 else if($posts == "No id found" || $posts != "something went wrong" )
 {

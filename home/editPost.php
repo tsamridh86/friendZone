@@ -51,15 +51,7 @@ if(isset($_GET['post']))
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        // function createImageTag(input){
-        // 	var elem = document.createElement("img");
-        // 	document.getElementById("para").appendChild("elem");
-        // 	elem.setAttribute("width", "350px");
-        // 	console.log("inside createElement");
-        // 	readURL(input);
-
-
-        // }
+        
     </script>
 
 	</head>
@@ -97,15 +89,9 @@ if(isset($_GET['post']))
 						Current Photo :
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-						<?php
-							if($image == "")
-								echo '<p id="para" onchange="createImageTag(this);">No image to display</p>';
-							else{
-						?>
-						<img id="preview" src="<?php echo $image; ?>" class="img-responsive" width="350px">
-						<?php
-							}
-						?>
+						
+						<img id="preview" src="<?php echo $image; ?>" alt = "No image to display" class="img-responsive" width="350px">
+						
 						<input type = "hidden" name = "old" value = "<?php echo $image; ?>"/>
 						<input type = "hidden" name = "postId" value = "<?php echo $postId; ?>"/>
 						<input type = "hidden" name = "uName" value = "<?php echo $userName; ?>"/>

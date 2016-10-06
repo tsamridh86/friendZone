@@ -11,12 +11,12 @@ if(isset($_GET['logout']))
 $users = new Users($conn);
 $users->logout();
 }
-if(isset($_GET['user1']) && isset($_GET['user2']))
+if(isset($_POST['user1']) && isset($_POST['user2']))
 {
 	$user = new Users($conn);
-	$user1 = $_GET['user1'];
-	$user2 = $_GET['user2'];
-	$uName = $_GET['profile'];
+	$user1 = $_POST['user1'];
+	$user2 = $_POST['user2'];
+	$uName = $_POST['profile'];
 	$result = $user->follow($user1, $user2);
 	if(!$result)
 	{
@@ -29,12 +29,13 @@ if(isset($_GET['user1']) && isset($_GET['user2']))
 
 }
 
-if(isset($_POST['like']))
+if(isset($_POST['like']) && isset($_POST['uId']) && isset($_POST['likeBtn']))
 {
 	$user = new Users($conn);
+	$wId = $_POST['uId'];
 	$postId = $_POST['like'];
 	$uName = $_POST['profile'];
-	$like = $user->likes($userId, $postId);
+	$like = $user->likes($wId, $postId);
 
 	if(!$like)
 		echo "<script type='text/javascript'>alert('Could not like the post');</script>";
@@ -121,12 +122,12 @@ if(!isset($_GET['profile']))
 									{
 										$result = $user->getProfileByUserName($_SESSION['userName']);
 										$uId = $result['userId'];	
-										echo '<form method = "get" action = "">';
+										echo '<form method = "post" action = "">';
 										echo '<input type = "hidden" name = "profile" value = "'.$userName.'">';
 										echo '<input type = "hidden" name = "user1" value = "'.$uId.'">';
 										echo '<input type = "hidden" name = "user2" value = "'.$userId.'">';
 										$isFollowing = $user->isFollowing($uId, $userId);
-										echo '<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-eye-'; if(!$isFollowing){echo 'open';}else{echo 'close';} echo '" aria-hidden="true"></span>'; if(!$isFollowing){echo 'Follow';}else{echo 'Unfollow';} echo '</button></form>';
+										echo '<button type="submit" class="btn btn-default" name = "followBtn" value = "1"><span class="glyphicon glyphicon-eye-'; if(!$isFollowing){echo 'open';}else{echo 'close';} echo '" aria-hidden="true"></span>'; if(!$isFollowing){echo 'Follow';}else{echo 'Unfollow';} echo '</button></form>';
 
 									}
 								?>
@@ -164,7 +165,7 @@ if(!isset($_GET['profile']))
 						
 					}
 			else if($following == "You are not following anyone" && $following !="Something went wrong"){
-				echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-info">Not following anyone</div>';
+				echo '<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 content alert alert-info">Not following anyone</div>';
 			}
 			else if($following != "You are not following anyone" && $following =="Something went wrong"){
 				echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-danger">Something went wrong</div>';
@@ -220,11 +221,14 @@ if($posts != "No posts found" && $posts != "No id found")
 						<form method="post" action="">
 
 							<input type = "hidden" name = "profile" value = "'.$userName.'">
-							<input type="hidden" name="like" value="'.$posts[$i]['postId'].'">';
-							$likeFlag = $user->isLiked($userId, $posts[$i]['postId']);
 
+							<input type="hidden" name="like" value="'.$posts[$i]['postId'].'">';
+							$result = $user->getProfileByUserName($_SESSION['userName']);
+							$wId = $result['userId'];
+							$likeFlag = $user->isLiked($wId, $posts[$i]['postId']);
+							echo '<input type = "hidden" name = "uId" value = "'.$wId.'">';
 							
-								echo '<button type="submit" class="btn btn-default"><span id = "spanIdLike" class="glyphicon glyphicon-thumbs-';if(!$likeFlag){echo "up";}else{echo "down";} echo '" aria-hidden="true"></span>'; 
+								echo '<button type="submit" class="btn btn-default" name = "likeBtn" value = "2"><span id = "spanIdLike" class="glyphicon glyphicon-thumbs-';if(!$likeFlag){echo "up";}else{echo "down";} echo '" aria-hidden="true"></span>'; 
 								if(!$likeFlag)
 									echo "Like <span class=\"badge\">".$user->getNoOfLikes($posts[$i]['postId'])."</span>";
 								else
@@ -296,7 +300,7 @@ else if(strcmp($posts, "No posts found")  === 0)
 						
 					}
 			else if($followers == "You are not following anyone" && $followers !="Something went wrong"){
-				echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-info">No any followers</div>';
+				echo '<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 content alert alert-info">No followers</div>';
 			}
 			else if($following != "You are not following anyone" && $followers =="Something went wrong"){
 				echo '<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 content alert alert-danger">Something went wrong</div>';
