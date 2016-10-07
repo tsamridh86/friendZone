@@ -501,7 +501,20 @@ class Users{
 			if($row['img']!=''){
 			unlink($row['img']);
 		}
-		
+		$query2="DELETE FROM comments WHERE postId='$postId'";
+		$result2=$this->conn->query($query2);
+		if(!$result2)
+		{
+
+			return false;
+		}
+		$query3="DELETE FROM likes WHERE postId='$postId'";
+		$result3=$this->conn->query($query3);
+		if(!$result3)
+		{
+
+			return false;
+		}
 		$query="DELETE FROM post WHERE postId='$postId'";
 		$result=$this->conn->query($query);
 		if($result)

@@ -198,7 +198,7 @@ if($posts != "No posts found" && $posts != "No id found")
 					echo '<img src="'.$image.'"  width = "80" class="img-responsive circle photoHolder">
 					</div>
 					<div class="col-xs-7 col-sm-7 col-md-10 col-lg-10">
-						<p><span class="postHead"><a href="profille.php?profile='.$userName.'"> @'.$userName.'</a></span> posted: 
+						<p><span class="postHead"><a href="profile.php?profile='.$userName.'"> @'.$userName.'</a></span> posted: 
 						</p>';
 					if($_GET['profile'] == $_SESSION['userName'])
 						{
